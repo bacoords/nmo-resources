@@ -1,0 +1,317 @@
+body {
+//    font-weight: normal;
+}
+html{
+font-size: 14px;
+line-height: 16px;
+}
+
+$dark-green:#397633;
+
+h1, h2, h3, h4{
+    color:$dark-green;
+}
+p{
+  font-size: 1.1rem;
+  line-height: 1.3rem;
+}
+h1{
+  font-size: 2.1rem;
+  line-height: 2.3rem;
+}
+h2{
+  font-size:1.75rem;
+  line-height: 2.25rem;
+}
+h3{
+  font-size:1.5rem;
+  line-height: 1.7rem;
+}
+h4{
+  font-size: 1.25rem;
+  line-height: 1.45rem;
+}
+h5{
+  font-size:1rem;
+  line-height: 1.2rem;
+}
+h6{
+  font-size:0.86rem;
+  line-height: 1rem;
+}
+
+h1.sunleaf{
+    height: auto;
+    color: #fff;
+    font-size: 2.1rem;
+  line-height: 2.3rem;
+    text-align: center;
+    font-weight:lighter;
+    padding-top:30px;
+    padding-bottom:30px;
+    margin-bottom: 0px;
+        background:
+         linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.5) 100%),
+        url('../img/sunleaf.jpg') no-repeat right !important;
+        background-size:cover !important;
+        background-attachment: fixed;
+}
+
+h1.welcome{
+    height: auto;
+    color: #fff;
+    font-size: 3rem;
+  line-height: 3.2rem;
+    text-align: center;
+    font-weight:lighter;
+    padding-top:30px;
+    padding-bottom:30px;
+}
+
+h1.gj-title {
+    height: auto;
+    display:block;
+    color:#397633;
+    font-weight: lighter;
+    font-size: 2rem;
+  line-height: 2.2rem;
+}
+
+h2.gj-h2 {
+    height: auto !important;
+    color: #397633 !important;
+    font-size:1.3rem;
+    line-height: 1.5rem;
+    font-weight: bolder;
+    margin-top:15px;
+}
+h3 {
+    height: auto !important;
+    color: #397633 !important;
+    font-size:1.7rem;
+  line-height: 1.9rem;
+    font-weight: bolder;
+    margin-top:15px;
+}
+.text-center{
+    text-align: center;
+}
+.text-right{
+  text-align: right;
+}
+.margin-top-zero{
+  margin-top: 0px !important;
+}
+.fixed-bottom{
+    position:absolute;
+    bottom:0;
+}
+.full-width{
+    max-width:100%;
+    display:block;
+    height:auto;
+}
+.footer-logo{
+    height:34px;
+    width:auto;
+    display: block;
+    margin:0 auto;
+}
+
+.img-background{
+        background:
+         linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.8) 100%),
+        url('../img/sunleaf.jpg') no-repeat right;
+        background-size:cover !important;
+        background-attachment: fixed;
+}
+
+.clear-background{
+    background: none !important;
+    a.item-content{
+      //background:rgba(0,0,0,0.1);
+      background: none !important;
+      color:#fff;
+      font-weight:normal;
+      font-size:2rem;
+      line-height: 2.2rem;
+      text-transform:uppercase;
+      //text-align:center;
+      padding-top:18px;
+      padding-bottom:18px;
+//      &:focus{
+//        font-weight:lighter;
+//      }
+//      &:visited{
+//        font-weight:lighter;
+//      }
+//      &:link{
+//        font-weight:lighter;
+//      }
+//      &:hover{
+//        font-weight:lighter;
+//      }
+//      &:active{
+//        font-weight:lighter;
+//      }
+    }
+    .item{
+        background:none !important;
+        border:none !important;
+    }
+}
+ul.inset{
+    li{
+        padding-bottom:5px;
+    }
+}
+
+//Side Menu Overrides
+.side-menu-override{
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 100%),
+    #6fb43f;
+  .list{
+    background-color:transparent;
+    .item{
+      border-width:0px;
+      text-align: right;
+        background-color: transparent;
+      .item-content{
+        background-color: transparent;
+        color: #fff;
+      }
+    }
+  }
+}
+.row.unlimited-items {
+  -webkit-box-flex-wrap: wrap;
+  -moz-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.row.unlimited-items .col{
+  
+  -webkit-box-flex: none;
+  -moz-box-flex: none;
+  -webkit-flex: none;
+  -ms-flex: none;
+  flex: none;
+  width: 50%;
+  padding:0px;
+  .card, .list-inset {
+    margin: 20px 5px;
+  }
+}
+
+.no-padding{
+  padding:0px;
+}
+.margin-bottom{
+  margin-bottom: 15px;
+}
+
+
+img.yt-thumb{
+    vertical-align: bottom;
+  display: block;
+  max-width: 100%;
+  height:auto;
+}
+
+@media (min-width: 680px) {
+  .modal {
+    top: 10%;
+    right: 10%;
+    bottom: 20%;
+    left: 10%;
+    min-height: 240px;
+    width: 80%;
+  }
+  .yt-title{
+    font-weight: 100;
+    font-size: 30px;
+    line-height: 32px;
+  }
+}
+//.col{
+//  padding:0px;
+//}
+
+//Responsive Video
+.embed-video {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 35px;
+    height: 0;
+    overflow: hidden;
+//    margin-bottom: 15px;
+}
+.embed-video iframe {
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+
+
+
+
+
+//Accesibilty Overrides
+.item{
+  font-size: 1.1rem;
+  line-height: 1.3rem;
+  p{
+    font-size: 1.1rem;
+    line-height: 1.3rem;
+  }
+  h1{
+    font-size: 2.1rem;
+    line-height: 2.3rem;
+  }
+  h2{
+    font-size:1.75rem;
+    line-height: 2.25rem;
+  }
+  h3{
+    font-size:1.5rem;
+    line-height: 1.7rem;
+  }
+  h4{
+    font-size: 1.25rem;
+    line-height: 1.45rem;
+  }
+  h5{
+    font-size:1rem;
+    line-height: 1.2rem;
+  }
+  h6{
+    font-size:0.86rem;
+    line-height: 1rem;
+  }
+}
+span.span-faq{
+  
+  font-size: 1.1rem;
+  line-height: 1.3rem;
+}
+.button{
+  font-size: 1.1rem;
+//  font-weight: lighter;
+}
+.tabs-icon-left.tabs .tab-item, .tabs-icon-left > .tabs .tab-item, .tabs-icon-right.tabs .tab-item, .tabs-icon-right > .tabs .tab-item {
+  font-size: 0.8rem;
+  line-height: 48px;
+//  font-weight: lighter;
+}
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
+  font-size: 1rem;
+  line-height: 1.2rem;
+}

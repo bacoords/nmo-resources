@@ -1,0 +1,25 @@
+<ion-view view-title="Find an Expert" ng-controller="DocCountriesCtrl">
+    <ion-content>
+        <h1 class="sunleaf">Find an Expert</h1>
+
+           <ion-list ng-if="isConnected">
+            <ion-item href="#/app/docstates" class="item-icon-right">
+                <i class="icon ion-ios-arrow-right"></i>
+                United States
+            </ion-item>
+              <ion-item ng-repeat="country in countries | orderBy: 'country' | filter: {country: '!United States'}" href="#/app/doccountries/{{country.country}}" class="item-icon-right">
+                {{country.country}}
+                  <i class="icon ion-ios-arrow-right"></i>
+              </ion-item>
+            </ion-list>
+           
+            <div class="card" ng-if="!isConnected">
+             <div class="item item-text-wrap">
+                <h2 class="assertive">No Network Connection</h2>
+               <p>I'm sorry, but your device is not connected to a network. This section of the app requires an internet connection.</p>
+             </div>
+           </div>
+ 
+
+    </ion-content>
+</ion-view>

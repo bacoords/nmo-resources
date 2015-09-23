@@ -1,0 +1,291 @@
+/* line 4, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+html {
+  font-size: 14px;
+  line-height: 16px; }
+
+/* line 11, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+h1, h2, h3, h4 {
+  color: #397633; }
+
+/* line 14, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+p {
+  font-size: 1.1rem;
+  line-height: 1.3rem; }
+
+/* line 18, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+h1 {
+  font-size: 2.1rem;
+  line-height: 2.3rem; }
+
+/* line 22, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+h2 {
+  font-size: 1.75rem;
+  line-height: 2.25rem; }
+
+/* line 26, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+h3 {
+  font-size: 1.5rem;
+  line-height: 1.7rem; }
+
+/* line 30, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+h4 {
+  font-size: 1.25rem;
+  line-height: 1.45rem; }
+
+/* line 34, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+h5 {
+  font-size: 1rem;
+  line-height: 1.2rem; }
+
+/* line 38, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+h6 {
+  font-size: 0.86rem;
+  line-height: 1rem; }
+
+/* line 43, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+h1.sunleaf {
+  height: auto;
+  color: #fff;
+  font-size: 2.1rem;
+  line-height: 2.3rem;
+  text-align: center;
+  font-weight: lighter;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 0px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 100%), url("../img/sunleaf.jpg") no-repeat right !important;
+  background-size: cover !important;
+  background-attachment: fixed; }
+
+/* line 60, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+h1.welcome {
+  height: auto;
+  color: #fff;
+  font-size: 3rem;
+  line-height: 3.2rem;
+  text-align: center;
+  font-weight: lighter;
+  padding-top: 30px;
+  padding-bottom: 30px; }
+
+/* line 71, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+h1.gj-title {
+  height: auto;
+  display: block;
+  color: #397633;
+  font-weight: lighter;
+  font-size: 2rem;
+  line-height: 2.2rem; }
+
+/* line 80, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+h2.gj-h2 {
+  height: auto !important;
+  color: #397633 !important;
+  font-size: 1.3rem;
+  line-height: 1.5rem;
+  font-weight: bolder;
+  margin-top: 15px; }
+
+/* line 88, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+h3 {
+  height: auto !important;
+  color: #397633 !important;
+  font-size: 1.7rem;
+  line-height: 1.9rem;
+  font-weight: bolder;
+  margin-top: 15px; }
+
+/* line 96, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+.text-center {
+  text-align: center; }
+
+/* line 99, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+.text-right {
+  text-align: right; }
+
+/* line 102, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+.margin-top-zero {
+  margin-top: 0px !important; }
+
+/* line 105, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+.fixed-bottom {
+  position: absolute;
+  bottom: 0; }
+
+/* line 109, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+.full-width {
+  max-width: 100%;
+  display: block;
+  height: auto; }
+
+/* line 114, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+.footer-logo {
+  height: 34px;
+  width: auto;
+  display: block;
+  margin: 0 auto; }
+
+/* line 121, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+.img-background {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%), url("../img/sunleaf.jpg") no-repeat right;
+  background-size: cover !important;
+  background-attachment: fixed; }
+
+/* line 129, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+.clear-background {
+  background: none !important; }
+  /* line 131, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+  .clear-background a.item-content {
+    background: none !important;
+    color: #fff;
+    font-weight: normal;
+    font-size: 2rem;
+    line-height: 2.2rem;
+    text-transform: uppercase;
+    padding-top: 18px;
+    padding-bottom: 18px; }
+  /* line 158, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+  .clear-background .item {
+    background: none !important;
+    border: none !important; }
+
+/* line 164, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+ul.inset li {
+  padding-bottom: 5px; }
+
+/* line 170, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+.side-menu-override {
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.5) 100%), #6fb43f; }
+  /* line 173, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+  .side-menu-override .list {
+    background-color: transparent; }
+    /* line 175, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+    .side-menu-override .list .item {
+      border-width: 0px;
+      text-align: right;
+      background-color: transparent; }
+      /* line 179, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+      .side-menu-override .list .item .item-content {
+        background-color: transparent;
+        color: #fff; }
+
+/* line 186, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+.row.unlimited-items {
+  -webkit-box-flex-wrap: wrap;
+  -moz-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
+
+/* line 194, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+.row.unlimited-items .col {
+  -webkit-box-flex: none;
+  -moz-box-flex: none;
+  -webkit-flex: none;
+  -ms-flex: none;
+  flex: none;
+  width: 50%;
+  padding: 0px; }
+  /* line 203, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+  .row.unlimited-items .col .card, .row.unlimited-items .col .list-inset {
+    margin: 20px 5px; }
+
+/* line 208, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+.no-padding {
+  padding: 0px; }
+
+/* line 211, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+.margin-bottom {
+  margin-bottom: 15px; }
+
+/* line 216, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+img.yt-thumb {
+  vertical-align: bottom;
+  display: block;
+  max-width: 100%;
+  height: auto; }
+
+@media (min-width: 680px) {
+  /* line 224, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+  .modal {
+    top: 10%;
+    right: 10%;
+    bottom: 20%;
+    left: 10%;
+    min-height: 240px;
+    width: 80%; }
+  /* line 232, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+  .yt-title {
+    font-weight: 100;
+    font-size: 30px;
+    line-height: 32px; } }
+
+/* line 243, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+.embed-video {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 35px;
+  height: 0;
+  overflow: hidden; }
+
+/* line 251, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+.embed-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+/* line 268, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+.item {
+  font-size: 1.1rem;
+  line-height: 1.3rem; }
+  /* line 271, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+  .item p {
+    font-size: 1.1rem;
+    line-height: 1.3rem; }
+  /* line 275, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+  .item h1 {
+    font-size: 2.1rem;
+    line-height: 2.3rem; }
+  /* line 279, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+  .item h2 {
+    font-size: 1.75rem;
+    line-height: 2.25rem; }
+  /* line 283, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+  .item h3 {
+    font-size: 1.5rem;
+    line-height: 1.7rem; }
+  /* line 287, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+  .item h4 {
+    font-size: 1.25rem;
+    line-height: 1.45rem; }
+  /* line 291, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+  .item h5 {
+    font-size: 1rem;
+    line-height: 1.2rem; }
+  /* line 295, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+  .item h6 {
+    font-size: 0.86rem;
+    line-height: 1rem; }
+
+/* line 300, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+span.span-faq {
+  font-size: 1.1rem;
+  line-height: 1.3rem; }
+
+/* line 305, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+.button {
+  font-size: 1.1rem; }
+
+/* line 309, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+.tabs-icon-left.tabs .tab-item, .tabs-icon-left > .tabs .tab-item, .tabs-icon-right.tabs .tab-item, .tabs-icon-right > .tabs .tab-item {
+  font-size: 0.8rem;
+  line-height: 48px; }
+
+/* line 314, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
+  font-size: 1rem;
+  line-height: 1.2rem; }
+
+/*# sourceMappingURL=stylesheet.css.css.map */

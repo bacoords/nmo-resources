@@ -1,0 +1,21 @@
+<ion-view view-title="Find an Expert" ng-controller="DocStateCtrl">
+    <ion-content>
+        <h1 class="gj-title padding">{{docstatetitle}}</h1>
+
+
+          <div ng-repeat="doc in docs" class="card">
+             
+              <div class="item item-text-wrap">
+                  <h2 class="gj-h2">{{doc.name}}</h2>
+                 
+                  <p><strong>{{doc.clinic}}</strong></p>
+                  <p>{{doc.address}}</p>
+                  <P>{{doc.city}}, {{doc.state}} {{doc.zip}}</P>
+                  <div ng-if="doc.phone">
+                        <a class="button button-block button-outline button-balanced icon-left ion-ios-telephone-outline"  href="#" ng-click="window.open('tel:+1{{doc.phonestripped}}', '_system', '')" >{{doc.phone}}</a>
+                  </div>
+              </div>
+        </div>
+
+    </ion-content>
+</ion-view>

@@ -1,0 +1,51 @@
+<ion-view view-title="Notes" ng-controller="NotesCtrl">
+    <ion-content>
+        <h1 class="sunleaf">My NMO Notes</h1>
+          <div class="padding">
+            <button class="button button-block button-outline button-balanced icon-right ion-ios-plus-empty" ng-click="openAddModal()">New Note</button>
+<!--
+            <br><br>
+             <div class="list">
+
+              <div class="item item-input-inset">
+                <label class="item-input-wrapper">
+                  <input type="text" placeholder="Search Notes" ng-model="searchNotes.$">
+                </label>
+                <button class="button button-balanced button-small">
+                  Submit
+                </button>
+               </div>
+            </div>
+-->
+          </div>
+              <div ng-repeat="note in notes track by $index | filter:searchNotes" class="card">
+               <div class="item item-body">
+                 <h3 class="margin-top-zero">{{note.title}}</h3>
+                <p style="white-space:pre-wrap;">{{note.content}}</p>
+                
+                 <h5 class="text-right">Last Saved: {{note.date | date:'EEE, MMM d h:mm a'}}</h5>
+              </div>
+              <div class="item tabs tabs-secondary tabs-icon-left">
+<!--
+                   <a class="tab-item positive disabled" href="#"  ng-click="shareNote(note.content, note.title)">
+                      <i class="icon ion-share"></i>
+                      Share
+                    </a>
+-->
+                    <a class="tab-item balanced" ng-click="editNote(note.id, note.title, note.content)">
+                      <i class="icon ion-edit"></i>
+                      Edit
+                    </a>
+                    <a class="tab-item assertive" ng-click="deleteNote(note)">
+                      <i class="icon ion-ios-trash-outline"></i>
+                      Delete
+                    </a>
+              </div>
+<!--                      <ion-option-button class="button-assertive icon ion-ios-trash-outline" ng-click="deleteNote(note)">  </ion-option-button>-->
+              </div>
+            
+   
+ 
+
+    </ion-content>
+</ion-view>

@@ -1,0 +1,25 @@
+<ion-view view-title="Clinical Trials">
+    <ion-content >
+        <h1 class="sunleaf">Clinical Trials</h1>
+         <div class="card">
+            <div class="item embed-video">
+                <iframe ng-src="https://www.youtube.com/embed/8mi5de3jF14?controls=0&amp;showinfo=0&amp;rel=0" frameborder="0" allowfullscreen></iframe>
+            </div>
+        
+        </div>
+        <div class="padding">
+           
+           <p>Clinical trials are designed to determine which medicines or procedures best benefit patients, and which may not. These studies often involve expert teams from academic, governmental and pharmaceutical sectors. In some cases, clinical trials seek to test the efficacy of a new drug for a disease which has no proven effective therapy. In other trials, one treatment is compared with another to examine which may be best in patients of differing disease stage or condition.</p>
+           
+
+           
+<!--        <h2 class="text-center">Clinical Trials FAQ</h2>    -->
+        </div>
+        <ion-list ng-controller="CTFaqsCtrl">
+          <ion-item ng-repeat="faq in faqs" href="#/app/clin_menu/{{faq.id}}" class="item-icon-right item-text-wrap">
+            {{faq.title}}
+              <i class="icon ion-ios-arrow-right"></i>
+          </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

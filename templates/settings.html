@@ -1,0 +1,30 @@
+<ion-view view-title="Settings" ng-controller="SettingsCtrl">
+    <ion-content>
+        <h1 class="sunleaf">Settings</h1>
+          <form name="settingsEditForm" method="post">
+            <ul class="list">
+              <li class="item item-toggle">
+                 Extra Large Font
+                 <label class="toggle toggle-balanced">
+                   <input type="checkbox" ng-model="settings.fontSize">
+                   <div class="track">
+                     <div class="handle"></div>
+                   </div>
+                 </label>
+              </li>
+              <li class="item item-toggle">
+                 Darker Font
+                 <label class="toggle toggle-balanced">
+                   <input type="checkbox" ng-model="settings.fontWeight">
+                   <div class="track">
+                     <div class="handle"></div>
+                   </div>
+                 </label>
+              </li>
+            </ul>
+            <div class="padding">
+              <button type="button" class="button button-block button-outline button-balanced icon-right ion-ios-checkmark-outline" ng-click="saveSettings(settings.fontSize, settings.fontWeight)">Update</button>
+            </div>
+          </form>
+    </ion-content>
+</ion-view>

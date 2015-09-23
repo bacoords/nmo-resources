@@ -1,0 +1,29 @@
+<ion-view view-title="Videos" ng-controller="VidCtrl">
+  <ion-content>
+    <h1 class="sunleaf">{{category}}</h1>
+    <div class="padding">
+      <div ng-repeat="vid in vidlist" class="row margin-bottom" ng-click="openModal(vid.videourl, vid.title)">
+       
+         <div class="col-33">
+           <img src="{{vid.thumburl}}" alt="Video Thumbnail" class="yt-thumb">
+         </div>
+         <div class="col-67 padding-left">
+          <p class="yt-title">{{vid.title}}</p>
+<!--           <a href="#" class="button button-small button-clear button-balanced icon-right ion-ios-play-outline">Watch</a>-->
+         </div>
+        
+<!--
+         <div class="embed-video">
+          <iframe ng-src="{{vid.videourl}}" frameborder="0" allowfullscreen></iframe>
+          </div>
+-->
+         
+
+      </div>
+      
+      <a href="#/app/vids_menu" class="button button-block button-balanced icon-left ion-ios-arrow-back" ng-if="!vidmore">Return to Categories</a>
+      <ion-infinite-scroll ng-if="vidmore" on-infinite="loadMore()" spinner="crescent">
+      </ion-infinite-scroll>
+    </div>
+  </ion-content>
+</ion-view>

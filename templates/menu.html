@@ -1,0 +1,67 @@
+<ion-side-menus enable-menu-with-back-views="true">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-light">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="right">
+<!--
+        <button class="button button-icon button-clear ion-ios-gear-outline">
+        </button>
+-->
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="right">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="right">
+    <ion-header-bar class="bar-light">
+       <a href="#/app/gjcf_menu" menu-close class="footer-logo">
+        <img src="img/AppbyGJCF.png" class="footer-logo"></a>
+    </ion-header-bar>
+    <ion-content class="side-menu-override">
+      <ion-list>
+          <!--
+        <ion-item menu-close ng-click="login()">
+          Login
+        </ion-item>
+              -->
+          <ion-item menu-close href="#/app/main_page">
+              Home Page
+          </ion-item>
+        <ion-item menu-close href="#/app/about_menu">
+              About NMO
+        </ion-item>
+          <ion-item menu-close href="#/app/diag_menu">
+              Diagnosis
+          </ion-item>
+          <ion-item menu-close href="#/app/vids_menu">
+              Videos
+          </ion-item>
+          <ion-item menu-close href="#/app/rese_menu">
+              Latest Research
+          </ion-item>
+          <ion-item menu-close href="#/app/clin_menu">
+              Clinical Trials 
+          </ion-item>
+          <ion-item menu-close href="#/app/notes_menu">
+              My NMO Notes
+          </ion-item>
+          <ion-item menu-close href="#/app/doccountries">
+              Find an Expert
+          </ion-item>
+          <ion-item menu-close href="#/app/blood_menu">
+              Blood Bank
+          </ion-item>
+          <ion-item menu-close href="#/app/gjcf_menu">
+              About The GJCF
+          </ion-item>
+          <ion-item menu-close href="#/app/settings">
+                Settings
+          </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

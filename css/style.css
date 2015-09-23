@@ -1,0 +1,77 @@
+/* Empty. Add your own CSS if you like */
+h1.sunleaf{
+    height: auto;
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
+    font-weight:100;
+    padding-top:30px;
+    padding-bottom:30px;
+        background:
+         linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.5) 100%),
+        url('../img/sunleaf.jpg') no-repeat right !important;
+        background-size:cover !important;
+        background-attachment: fixed;
+}
+
+h1.welcome{
+       height: auto;
+    color: #fff;
+    font-size: 42px;
+    text-align: center;
+    font-weight:100;
+    padding-top:30px;
+    padding-bottom:30px;
+}
+
+h1.gj-title {
+    height: auto;
+    display:block;
+    color:#397633;
+    font-weight: 100;
+/*
+    color:#fff;
+    background: #397633;
+*/
+    font-size: 30px;
+    line-height: 32px;
+}
+
+h2.gj-h2 {
+    height: auto !important;
+    color: #397633 !important;
+    font-size:18px;
+    font-weight: 700;
+}
+
+.text-center{
+    text-align: center;
+}
+.embed-video{
+    text-align:center;
+}
+
+.full-width{
+    max-width:100%;
+    display:block;
+    height:auto;
+}
+.img-background{
+        background:
+         linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.5) 100%),
+        url('../img/sunleaf.jpg') no-repeat right !important;
+        background-size:cover !important;
+        background-attachment: fixed;
+}
+
+.clear-background{
+    background: none !important;
+}
+
+.clear-background a.item-content{
+    background:none !important;
+}
+
+.clear-background .item{
+    background:none !important;
+}

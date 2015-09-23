@@ -1,0 +1,15 @@
+<ion-view view-title="Find an Expert" ng-controller="DocStatesCtrl">
+    <ion-content>
+        <h1 class="sunleaf">Find an Expert (US)</h1>
+
+           <ion-list class="item-icon-right">
+              <ion-item ng-repeat="state in states | orderBy: 'state'" href="#/app/docstates/{{state.state}}">
+                {{state.state}}
+                  <i class="icon ion-ios-arrow-right"></i>
+              </ion-item>
+            </ion-list>
+   
+ 
+
+    </ion-content>
+</ion-view>

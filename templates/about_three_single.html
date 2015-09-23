@@ -1,0 +1,15 @@
+<ion-view view-title="About NMO" ng-controller="FaqCtrl">
+    <ion-content class="padding">
+        <h1 class="gj-title">{{faq.title}}</h1>
+
+        <span class="span-faq" style="white-space:pre-wrap">{{faq.content}}</span>
+        
+        
+        <div class="card" ng-if="faq.video">
+            <div class="item embed-video" ng-if="faq.video">
+                <iframe ng-src="{{videourl}}" frameborder="0" allowfullscreen></iframe>
+            </div>
+        
+        </div>
+    </ion-content>
+</ion-view>

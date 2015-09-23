@@ -1,0 +1,24 @@
+<div class="modal">
+ <ion-modal-view>
+  <ion-content class="padding">
+  <br>
+   <h1 class="gj-title">Edit Note</h1>
+     <form name="modalEditForm" method="post">
+     <br><br>
+    <label class="item item-input">
+      <input type="text" placeholder="Title" ng-model="editModal.modalEditNoteTitle">
+    </label>
+     <br><br>
+    <label class="item item-input">
+      <textarea placeholder="Content" ng-model="editModal.modalEditNoteContent" rows="10" ></textarea>
+    </label>
+    <br><br>
+    <div class="button-bar">
+      <button type="button" class="button button-clear button-balanced icon-right ion-ios-checkmark-outline" ng-click="saveEditModal(editModal.modalEditNoteID, editModal.modalEditNoteTitle, editModal.modalEditNoteContent)">Submit</button>
+      <button class="button button-clear button-assertive icon-right ion-ios-close-empty" ng-click="closeEditModal()">Cancel</button>
+    </div>
+   
+    </form>
+  </ion-content>
+</ion-modal-view>
+</div>

@@ -1,0 +1,14 @@
+<ion-view view-title="About NMO">
+    <ion-content>
+        <h1 class="gj-title padding">NMO FAQ</h1>
+
+           <ion-list ng-controller="FaqsCtrl" class="item-icon-right">
+              <ion-item ng-repeat="faq in faqs" href="#/app/faqs/{{faq.id}}" class=" item-text-wrap">
+                {{faq.title}}
+                  <i class="icon ion-ios-arrow-right"></i>
+              </ion-item>
+            </ion-list>
+   
+
+    </ion-content>
+</ion-view>
