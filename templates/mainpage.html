@@ -1,48 +1,101 @@
-<ion-view view-title="Home" hide-nav-bar="true" ng-controller="MainPageCtrl">
-    <ion-content class="img-background" delegate-handle="mainScroll">
-        <h1 class="welcome">NMO Resources</h1>
+<ion-view hide-nav-bar="false" hide-back-button="true" can-swipe-back="false" view-title="Home" ng-controller="MainPageCtrl">
+
+    <ion-content main-parallax has-bounce="false" scroll-event-interval="5" delegate-handle="mainScroll">
+        <div class="welcome-parallax">
+                <h1>NMO Resources</h1>
+        </div>
+             <div class="white-background">  
+                <div class="row" style="padding:0px;"><a href="#/app/about_menu" class="frnt-2" style=" background:
+                  linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.5) 100%),url('img/aboutnmo.jpg') no-repeat center;background-size:cover;"><span class="frnt-2-in">About NMO</span></a></div>
+
+                <div class="row" style="padding:0px;"><a href="#/app/diag_menu" class="frnt-2" style=" background:
+                  linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.5) 100%),url('img/newdiagbg.jpg') no-repeat center;background-size:cover;"><span class="frnt-2-in">Diagnosis</span></a></div>     
+
+                <div class="row" style="padding:0px;"><a href="#/app/vids_menu" class="frnt-2" style=" background:
+                  linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.5) 100%),url('img/videos.png') no-repeat center;background-size:cover;"><span class="frnt-2-in">Videos</span></a></div>
+
+                <div class="row" style="padding:0px;"><a href="#/app/rese_menu" class="frnt-2" style=" background:
+                  linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.5) 100%),url('img/research.jpg') no-repeat center;background-size:cover;"><span class="frnt-2-in">Research</span></a></div>
+
+                <div class="row" style="padding:0px;"><a href="#/app/clin_menu" class="frnt-2" style=" background:
+                  linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.5) 100%),url('img/clinical.png') no-repeat center;background-size:cover;"><span class="frnt-2-in">Clinical Trials</span></a></div>
+
+                <div class="row" style="padding:0px;"><a href="#/app/notes_menu" class="frnt-2" style=" background:
+                  linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.5) 100%),url('img/shutterstock_275161592.jpg') no-repeat center;background-size:cover;"><span class="frnt-2-in">My NMO Notes</span></a></div>
+         
+                <div class="row" style="padding:0px;"><a href="#/app/adre_menu" class="frnt-2" style=" background:
+                  linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.5) 100%),url('img/resources.jpg') no-repeat center;background-size:cover;"><span class="frnt-2-in">Advocate Resources</span></a></div>
+
+                <div class="row" style="padding:0px;"><a href="#/app/doccountries" class="frnt-2" style=" background:
+                  linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.5) 100%),url('img/experts.jpg') no-repeat center;background-size:cover;"><span class="frnt-2-in">Find an Expert</span></a></div>     
+
+                <div class="row" style="padding:0px;"><a href="#/app/blood_menu" class="frnt-2" style=" background:
+                  linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.5) 100%),url('img/bloodbank.jpg') no-repeat center;background-size:cover;"><span class="frnt-2-in">Blood Bank</span></a></div>
+
+                <div class="row" style="padding:0px;"><a href="#/app/gjcf_menu" class="frnt-2" style=" background:
+                  linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.5) 100%),url('img/about.jpg') no-repeat center;background-size:cover;"><span class="frnt-2-in">The GJCF</span></a></div>
+
+                <div class="row" style="padding:0px;"><a href="#/app/settings" class="frnt-2" style=" background:
+                  linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.5) 100%),url('img/settings.jpg') no-repeat center;background-size:cover;"><span class="frnt-2-in">Settings</span></a></div>
+
+         </div>
+         
+           
+<!--
+        
         <ion-list class="clear-background">
-            <ion-item href="#/app/about_menu" class="item-icon-right item-text-wrap">
+            <ion-item href="#/app/about_menu" class="item-text-wrap">
                 About NMO 
                 <i class="icon ion-ios-arrow-forward"></i>
             </ion-item>
-            <ion-item href="#/app/diag_menu" class="item-icon-right item-text-wrap">
+            <ion-item href="#/app/diag_menu" class="item-text-wrap">
                 Diagnosis
                 <i class="icon ion-ios-arrow-forward"></i>
             </ion-item>
-            <ion-item href="#/app/vids_menu" class="item-icon-right item-text-wrap">
+            <ion-item href="#/app/vids_menu" class="item-text-wrap">
                 Videos
                 <i class="icon ion-ios-arrow-forward"></i>
             </ion-item>
-            <ion-item href="#/app/rese_menu" class="item-icon-right item-text-wrap">
+            <ion-item href="#/app/rese_menu" class="item-text-wrap">
                 Latest Research
                 <i class="icon ion-ios-arrow-forward"></i>
             </ion-item>
-            <ion-item href="#/app/clin_menu" class="item-icon-right item-text-wrap">
+            <ion-item href="#/app/clin_menu" class="item-text-wrap">
                 Clinical Trials
                 <i class="icon ion-ios-arrow-forward"></i>
             </ion-item>
-            <ion-item href="#/app/notes_menu" class="item-icon-right item-text-wrap">
+            <ion-item href="#/app/notes_menu" class="item-text-wrap">
                 My NMO Notes
                 <i class="icon ion-ios-arrow-forward"></i>
             </ion-item>
-            <ion-item href="#/app/doccountries" class="item-icon-right item-text-wrap">
+            <ion-item href="#/app/adre_menu" class="item-text-wrap">
+                Advocate Resources
+                <i class="icon ion-ios-arrow-forward"></i>
+            </ion-item>
+            <ion-item href="#/app/doccountries" class="item-text-wrap">
                 Find an Expert
                 <i class="icon ion-ios-arrow-forward"></i>
             </ion-item>
-            <ion-item href="#/app/blood_menu" class="item-icon-right item-text-wrap">
+            <ion-item href="#/app/blood_menu" class="item-text-wrap">
                 Blood Bank
                 <i class="icon ion-ios-arrow-forward"></i>
             </ion-item>
-            <ion-item href="#/app/gjcf_menu" class="item-icon-right item-text-wrap">
+            <ion-item href="#/app/gjcf_menu" class="item-text-wrap">
                 About The GJCF
                 <i class="icon ion-ios-arrow-forward"></i>
             </ion-item>
-            <ion-item href="#/app/settings" class="item-icon-right item-text-wrap">
+            <ion-item href="#/app/settings" class="item-text-wrap">
                 Settings
                 <i class="icon ion-ios-arrow-forward"></i>
             </ion-item>
         </ion-list>
+-->
+<!--
+        <div class="white-background">
+          <a href="#/app/gjcf_menu" class="footer-logo">
+        <img src="img/AppbyGJCF.png" class="footer-logo"></a>
+        </div>
+-->
     </ion-content>
     <ion-footer-bar>
         <a href="#/app/gjcf_menu" class="footer-logo">

@@ -1,21 +1,28 @@
 <div class="modal">
- <ion-modal-view>
-  <ion-content class="padding">
-  <br>
-   <h1 class="gj-title">Edit Note</h1>
+ <ion-modal-view> 
+  <ion-header-bar>
+      <h1 class="title">Edit Note</h1>
+    </ion-header-bar>
+  <ion-content>
+
      <form name="modalEditForm" method="post">
-     <br><br>
-    <label class="item item-input">
+   
+     <div class="list">
+    <label class="item item-input item-floating-label">
+     <span class="input-label">Title</span>
       <input type="text" placeholder="Title" ng-model="editModal.modalEditNoteTitle">
     </label>
-     <br><br>
-    <label class="item item-input">
-      <textarea placeholder="Content" ng-model="editModal.modalEditNoteContent" rows="10" ></textarea>
+
+    <label class="item item-input item-floating-label">
+       <span class="input-label">Note</span>
+      <textarea placeholder="Note" ng-model="editModal.modalEditNoteContent" rows="10" ></textarea>
     </label>
+    </div>
     <br><br>
     <div class="button-bar">
+     <button class="button button-clear button-assertive icon-right ion-ios-close-empty" ng-click="closeEditModal()">Cancel</button>
       <button type="button" class="button button-clear button-balanced icon-right ion-ios-checkmark-outline" ng-click="saveEditModal(editModal.modalEditNoteID, editModal.modalEditNoteTitle, editModal.modalEditNoteContent)">Submit</button>
-      <button class="button button-clear button-assertive icon-right ion-ios-close-empty" ng-click="closeEditModal()">Cancel</button>
+      
     </div>
    
     </form>

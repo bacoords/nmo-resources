@@ -1,0 +1,36 @@
+<ion-view view-title="Advocate Resources" ng-controller="AdreThreeCtrl">
+    <ion-content header-parallaxsub scroll-event-interval="5">
+        
+        <h1 class="sunleaf parallax-sub">Support Groups</h1>
+        <div class="white-background">
+        <div class="padding">
+          <p>Interested in joining a group? Contact Guthy-Jackson:</p>
+           <a class="button button-block button-outline button-balanced icon-left ion-ios-telephone-outline"   href="#" onclick="window.open('tel:+18586387638', '_system', ''); return false;">858.638.7638 (Office)</a> <a class="button button-block button-outline button-balanced icon-left ion-ios-email-outline"  href="#" onclick="window.open('mailto:info@guthyjacksonfoundation.org?subject=Support Groups', '_system', ''); return false;">info@guthyjacksonfoundation.org</a>
+        </div>
+       <ion-list>
+          <ion-item class="item-text-wrap" ng-repeat="group in groups">
+            <h3>{{group.gsx$name.$t}}</h3>
+            <p ng-show="group.gsx$location.$t">{{group.gsx$location.$t}}</p>
+            <p ng-hide="group.gsx$location.$t">Location TBD</p>
+            <p ng-show="group.gsx$address.$t">{{group.gsx$address.$t}}</p>
+            <p ng-show="group.gsx$address.$t">{{group.gsx$city.$t}}, {{group.gsx$state.$t}} {{group.gsx$zip.$t}}</p>
+            <p ng-show="group.gsx$nextmeetingdate.$t"><strong>Next Meeting Date: {{group.gsx$nextmeetingdate.$t}}</strong></p>
+            <p ng-show="group.gsx$nextmeetingtime.$t"><strong>Next Meeting Time: {{group.gsx$nextmeetingtime.$t}}</strong></p>
+            <p ng-hide="group.gsx$nextmeetingdate.$t"><strong>Next Meeting TBD</strong></p>
+          </ion-item>
+        
+      
+        </ion-list>
+        <div class="padding white-background text-center">
+          <ion-spinner ng-if="!isLoaded" icon="lines" class="center spinner-balanced"></ion-spinner>
+        </div>
+             <div class="card" ng-if="!isConnected">
+             <div class="item item-text-wrap">
+                <h2 class="assertive">No Network Connection</h2>
+               <p>I'm sorry, but your device is not connected to a network. This section of the app requires an internet connection.</p>
+             </div>
+           </div>
+      </div>
+    </ion-content>
+</ion-view>
+  

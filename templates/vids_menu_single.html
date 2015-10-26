@@ -1,11 +1,11 @@
 <ion-view view-title="Videos" ng-controller="VidCtrl">
-  <ion-content>
-    <h1 class="sunleaf">{{category}}</h1>
-    <div class="padding">
+  <ion-content header-parallaxsub scroll-event-interval="5">
+    <h1 class="sunleaf parallax-sub">{{category}}</h1>
+    <div class="padding white-background">
       <div ng-repeat="vid in vidlist" class="row margin-bottom" ng-click="openModal(vid.videourl, vid.title)">
        
          <div class="col-33">
-           <img src="{{vid.thumburl}}" alt="Video Thumbnail" class="yt-thumb">
+           <img ng-src="{{vid.thumburl}}" alt="Video Thumbnail" class="yt-thumb">
          </div>
          <div class="col-67 padding-left">
           <p class="yt-title">{{vid.title}}</p>

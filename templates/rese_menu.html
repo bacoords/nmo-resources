@@ -1,7 +1,7 @@
-<ion-view view-title="Latest Research">
-    <ion-content>
-        <h1 class="sunleaf">Latest Research</h1>
-        <ion-list>
+<ion-view view-title="Latest Research" ng-controller="ResearchMenuCtrl">
+    <ion-content header-parallax scroll-event-interval="5">
+        <h1 class="sunleaf parallax">Latest Research</h1>
+        <ion-list ng-if="isConnected">
             <ion-item href="#/app/rese_one" class="item-icon-right">
                 ICC Review Articles
                 <i class="icon ion-ios-arrow-right"></i>
@@ -11,5 +11,13 @@
                 <i class="icon ion-ios-arrow-right"></i>
             </ion-item>
         </ion-list>
+        <div class="padding white-background"><br>
+           <div class="card" ng-if="!isConnected">
+             <div class="item item-text-wrap">
+                <h2 class="assertive">No Network Connection</h2>
+               <p>I'm sorry, but your device is not connected to a network. This section of the app requires an internet connection.</p>
+             </div>
+           </div>
+      </div>
     </ion-content>
 </ion-view>

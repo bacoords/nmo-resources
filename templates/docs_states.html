@@ -1,14 +1,17 @@
 <ion-view view-title="Find an Expert" ng-controller="DocStatesCtrl">
-    <ion-content>
-        <h1 class="sunleaf">Find an Expert (US)</h1>
+    <ion-content header-parallaxsub scroll-event-interval="5">
+        <h1 class="sunleaf parallax-sub">Find an Expert (US)</h1>
 
-           <ion-list class="item-icon-right">
-              <ion-item ng-repeat="state in states | orderBy: 'state'" href="#/app/docstates/{{state.state}}">
+           <ion-list >
+              <ion-item ng-repeat="state in states | orderBy: 'state'" href="#/app/docstates/{{state.state}}" class="item-icon-right">
                 {{state.state}}
                   <i class="icon ion-ios-arrow-right"></i>
               </ion-item>
             </ion-list>
-   
+            <div class="padding white-background text-center">
+              <ion-spinner ng-if="!isLoaded" icon="lines" class="center spinner-balanced"></ion-spinner>
+            </div>
+
  
 
     </ion-content>

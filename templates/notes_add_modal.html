@@ -1,21 +1,28 @@
 <div class="modal">
  <ion-modal-view>
-  <ion-content class="padding">
-  <br>
-   <h1 class="gj-title">Add Note</h1>
+ 
+  <ion-header-bar>
+      <h1 class="title">Add Note</h1>
+    </ion-header-bar>
+  <ion-content>
+<!--   <h1 class="gj-title padding">Add Note</h1>-->
      <form name="modalAddForm" method="post">
-     <br><br>
-    <label class="item item-input">
+  
+     <div class="list">
+    <label class="item item-input item-floating-label">
+     <span class="input-label">Title</span>
       <input type="text" placeholder="Title" ng-model="modalAddNoteTitle">
     </label>
-     <br><br>
-    <label class="item item-input">
-      <textarea placeholder="Content" ng-model="modalAddNoteContent" rows="10" ></textarea>
+    <label class="item item-input item-floating-label">
+     <span class="input-label">Note</span>
+      <textarea placeholder="Note" ng-model="modalAddNoteContent" rows="10" ></textarea>
     </label>
+    </div>
     <br><br>
     <div class="button-bar">
-      <button type="button" class="button button-clear button-balanced icon-right ion-ios-checkmark-outline" ng-click="saveAddModal(modalAddNoteTitle, modalAddNoteContent)">Submit</button>
+      
       <button class="button button-clear button-assertive icon-right ion-ios-close-empty" ng-click="closeAddModal()">Cancel</button>
+      <button type="button" class="button button-clear button-balanced icon-right ion-ios-checkmark-outline" ng-click="saveAddModal(modalAddNoteTitle, modalAddNoteContent)">Submit</button>
     </div>
    
     </form>

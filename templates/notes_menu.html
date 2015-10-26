@@ -1,6 +1,7 @@
 <ion-view view-title="Notes" ng-controller="NotesCtrl">
-    <ion-content>
-        <h1 class="sunleaf">My NMO Notes</h1>
+    <ion-content header-parallax scroll-event-interval="5">
+        <h1 class="sunleaf parallax">My NMO Notes</h1>
+         <div class="white-background">
           <div class="padding">
             <button class="button button-block button-outline button-balanced icon-right ion-ios-plus-empty" ng-click="openAddModal()">New Note</button>
 <!--
@@ -18,7 +19,9 @@
             </div>
 -->
           </div>
-              <div ng-repeat="note in notes track by $index | filter:searchNotes" class="card">
+             
+             <br>
+              <div ng-repeat="note in notes | orderBy:sortNote:true" class="card">
                <div class="item item-body">
                  <h3 class="margin-top-zero">{{note.title}}</h3>
                 <p style="white-space:pre-wrap;">{{note.content}}</p>
@@ -31,20 +34,20 @@
                       <i class="icon ion-share"></i>
                       Share
                     </a>
--->
+-->                 <a class="tab-item assertive" ng-click="deleteNote(note)">
+                      <i class="icon ion-ios-trash-outline"></i>
+                      Delete
+                    </a>
                     <a class="tab-item balanced" ng-click="editNote(note.id, note.title, note.content)">
                       <i class="icon ion-edit"></i>
                       Edit
                     </a>
-                    <a class="tab-item assertive" ng-click="deleteNote(note)">
-                      <i class="icon ion-ios-trash-outline"></i>
-                      Delete
-                    </a>
+                    
               </div>
 <!--                      <ion-option-button class="button-assertive icon ion-ios-trash-outline" ng-click="deleteNote(note)">  </ion-option-button>-->
               </div>
             
-   
+   </div>
  
 
     </ion-content>

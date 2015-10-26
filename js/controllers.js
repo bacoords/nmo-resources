@@ -1,5 +1,6 @@
 angular.module('starter.controllers', [])
 
+
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
 
     // With the new view caching in Ionic, Controllers are only called
@@ -97,6 +98,7 @@ angular.module('starter.controllers', [])
 
 .controller('FaqsCtrl', function($scope, FaqsFactory){
     $scope.faqs = FaqsFactory.all();
+   if(typeof analytics !== 'undefined') { analytics.trackView("ABout NMO FAQs View"); }
 })
 
 .controller('FaqCtrl', function($scope, $sce, $stateParams, FaqsFactory){
@@ -145,6 +147,7 @@ angular.module('starter.controllers', [])
 
 .controller('CTFaqsCtrl', function($scope, CTFaqsFactory){
     $scope.faqs = CTFaqsFactory.all();
+   if(typeof analytics !== 'undefined') { analytics.trackView("Clinical Trials View"); }
 })
 
 .controller('CTFaqCtrl', function($scope, $sce, $stateParams, CTFaqsFactory){
@@ -223,6 +226,7 @@ angular.module('starter.controllers', [])
 
 .controller('CatsCtrl', function($scope, $ionicPlatform, CatFactory){
     $scope.cats = CatFactory.all();
+  
    $ionicPlatform.ready(function() {
         if(window.Connection) {
           if(navigator.connection.type == Connection.NONE) {
@@ -231,7 +235,7 @@ angular.module('starter.controllers', [])
 
           } else {
             $scope.isConnected = true;
-//            if(typeof analytics !== undefined) { analytics.trackView("Videos Controller"); }
+            if(typeof analytics !== 'undefined') { analytics.trackView("Videos View"); }
           }
       }
    });
@@ -1002,6 +1006,7 @@ angular.module('starter.controllers', [])
     $scope.modal.videourl = videourl;
     $scope.modal.title = title;
     $scope.modal.show();
+     if(typeof analytics !== 'undefined') { analytics.trackView("Video Open: "); }
   };
   $scope.closeModal = function() {
     $scope.modal.hide();
@@ -1032,12 +1037,12 @@ angular.module('starter.controllers', [])
    $ionicPlatform.ready(function() {
         if(window.Connection) {
           if(navigator.connection.type == Connection.NONE) {
-
+           $scope.isLoaded = true;
             $scope.isConnected = false;
 
           } else {
             $scope.isConnected = true;
-//            if(typeof analytics !== undefined) { analytics.trackView("Find an Expert Controller"); }
+            if(typeof analytics !== 'undefined') { analytics.trackView("Find an Expert View"); }
           }
       }
    });
@@ -1063,10 +1068,10 @@ angular.module('starter.controllers', [])
                var oldCon = country;
 
            }
-    
+          $scope.isLoaded = true;
         })
         .error(function(data, status, headers, config){
-
+            $scope.isLoaded = false;
         });
     
 })
@@ -1100,10 +1105,10 @@ angular.module('starter.controllers', [])
                $scope.docs.push({id : i, name : name, clinic : clinic, city: city, state: state, zip: zipstr, phone : phone, phonestripped: phonestripped, email : email, address: address});
               
            }
-            
+            $scope.isLoaded = true;
         })
     .error(function(data, status, headers, config){
-    
+    $scope.isLoaded = false;
     });
 
 })
@@ -1173,9 +1178,9 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('NotesCtrl', function($scope, $ionicModal, $ionicPopup, $ionicListDelegate, $cordovaSQLite, $cordovaSocialSharing){
+.controller('NotesCtrl', function($scope, $ionicModal, $ionicPopup, $ionicListDelegate, $cordovaSQLite){
 //  $scope.notes = NotesFactory.all();
-//  if(typeof analytics !== undefined) { analytics.trackView("Notes Controller"); }
+  if(typeof analytics !== 'undefined') { analytics.trackView("Notes View"); }
   $scope.notes = [];
   $scope.searchNotes = '';
   var query = "SELECT id, title, content, date FROM notes";
@@ -1193,7 +1198,13 @@ angular.module('starter.controllers', [])
       console.error(err);
   });
   
- 
+ //sort function
+  $scope.sortNote = function(note) {
+    console.log(note);
+    var date = new Date(note.date);
+    console.log(date);
+    return date;
+};
 
   //Edit Note Functions
   $scope.update = function(id, title, content){
@@ -1356,29 +1367,65 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('MainPageCtrl', function($scope, $ionicLoading, $ionicScrollDelegate, $timeout){
-//  $scope.show = function() {
-//    $ionicLoading.show({
-//      template: 'Loading...',
-//      duration: 
+.controller('MainPageCtrl', function($scope, $ionicLoading, $ionicHistory, $ionicScrollDelegate, $timeout, $ionicModal){
+  $scope.$on('$ionicView.enter', function(){
+      $ionicHistory.clearCache();
+      $ionicHistory.clearHistory();
+//  console.log($ionicHistory.viewHistory());
+  });
+
+//  //Cleanup the modal when we're done with it!
+//  $scope.$on('$destroy', function() {
+//    $scope.modal.remove();
+//  });
+//  // Execute action on hide modal
+//  $scope.$on('modal.hidden', function() {
+//    // Execute action
+//  });
+//  // Execute action on remove modal
+//  $scope.$on('modal.removed', function() {
+//    // Execute action
+//  });
+//
+//  $scope.$on('$ionicView.enter', function() {
+//    $timeout(function() {
+//      
+//      $ionicModal.fromTemplateUrl('templates/walkthrough.html', {
+//        scope: $scope,
+//        animation: 'slide-in-up'
+//      }).then(function(modal) {
+//        $scope.modal = modal;
+//      });
+//      $scope.modal.show();
 //    });
+//  });
+////
+//  $scope.endWalkthrough = function(){
+//        $scope.modal.hide();
+//        $scope.modal.remove();
 //  };
-//  $scope.hide = function(){
-//    $ionicLoading.hide();
-//  };
-//  $scope.show();
-  $scope.$on('$ionicView.enter', function() {
-    $timeout(function() {
-     $ionicScrollDelegate.$getByHandle('mainScroll').scrollTop();
-   });
-});
-   
+//  
+  
 })
+
+//.controller('SideMenuCtrl', function($scope, $state, $ionicHistory){
+//  $scope.$on('$ionicView.afterLeave',	function(){
+//   
+//     $ionicHistory.clearCache();
+//  });
+//})
 
 
 //Settings Page
 .controller('SettingsCtrl', function($scope, $state, $ionicPopup, $ionicHistory, $cordovaSQLite){
+$ionicHistory.clearHistory();
+  $ionicHistory.clearCache();
   $scope.settings = [];
+   if(typeof analytics !== 'undefined') { analytics.trackView("Settings View"); }
+  
+  $scope.isIOS = ionic.Platform.isIOS();
+  $scope.isAndroid = ionic.Platform.isAndroid();
+  
   var query = "SELECT id, name, value FROM settings";
   $cordovaSQLite.execute(db, query, []).then(function(res) {
       if(res.rows.length > 0) {
@@ -1390,6 +1437,9 @@ angular.module('starter.controllers', [])
                     if(res.rows.item(i).name === 'fontWeight'){
                       $scope.settings.fontWeight = true;
                     }
+                    if(res.rows.item(i).name === 'bgImages'){
+                      $scope.settings.bgImages = true;
+                    }
                   console.log($scope.settings);
                 }
             }
@@ -1399,10 +1449,16 @@ angular.module('starter.controllers', [])
   }, function (err) {
       console.error(err);
   });
-  $scope.saveSettings = function(fontSize, fontWeight){
+  $scope.saveSettings = function(fontSize, fontWeight, bgImages){
     document.documentElement.removeAttribute('style');
-//    document.documentElement.style.fontSize = "14px";
-//    document.documentElement.style.lineHeight = "16px";
+    
+    var sheetToBeRemoved = document.getElementById('bgImagesSheet');
+    if(sheetToBeRemoved){
+      var sheetParent = sheetToBeRemoved.parentNode;
+    sheetParent.removeChild(sheetToBeRemoved);
+    }
+    
+    
     $cordovaSQLite.execute(db, "DELETE FROM settings");
     if(fontSize === true){
       var query = "INSERT INTO settings (name, value) VALUES(?,?)";
@@ -1421,6 +1477,17 @@ angular.module('starter.controllers', [])
           console.error(err);
       });
     }
+    if(bgImages === true) {
+      var query = "INSERT INTO settings (name, value) VALUES(?,?)";
+      $cordovaSQLite.execute(db, query, ['bgImages', bgImages]).then(function(res) {
+            var sheet = document.createElement('style')
+                sheet.innerHTML = "h1.sunleaf, .welcome-parallax, .frnt-2 {background: #397633 !important;} .frnt-2 {height:auto !important; min-height:70px;}";
+                 sheet.id = 'bgImagesSheet';
+                document.body.appendChild(sheet);
+      }, function (err) {
+          console.error(err);
+      });
+    }
     $ionicPopup.alert({
         title: "Settings Updated",
         content: "Your new settings have been saved."
@@ -1430,6 +1497,146 @@ angular.module('starter.controllers', [])
       $state.go('app.main_page', {}, {reload:true});
     });
   }
+})
+
+
+  
+
+.controller('ResearchMenuCtrl', function($scope, $ionicPlatform){
+   if(typeof analytics !== 'undefined') { analytics.trackView("Research Menu View"); }
+   $ionicPlatform.ready(function() {
+        if(window.Connection) {
+          if(navigator.connection.type == Connection.NONE) {
+
+            $scope.isConnected = false;
+
+          } else {
+            $scope.isConnected = true;
+            if(typeof analytics !== 'undefined') { analytics.trackView("Latest Research View"); }
+          }
+      }
+   });
+
+})
+
+
+.controller('ResearchOneCtrl', function($scope, $http, $ionicPlatform){
+   $ionicPlatform.ready(function() {
+        if(window.Connection) {
+          if(navigator.connection.type == Connection.NONE) {
+            $scope.isLoaded = true;
+            $scope.isConnected = false;
+
+          } else {
+            $scope.isConnected = true;
+            
+          }
+      }
+   });
+  if(typeof analytics !== 'undefined') { analytics.trackView("ICC Articles View"); }
+    var url = "https://spreadsheets.google.com/feeds/list/1VdUXE0AYNZkCGmVHpQdH4FsxriPoeAKThjzuNnRBvJ8/od6/public/values?alt=json";
+
+  $http.get(url)
+    .success(function(data, status, headers, config){
+
+       $scope.articles = data.feed.entry;
+      
+        $scope.isLoaded = true;
+
+    })
+    .error(function(data, status, headers, config){
+      $scope.isLoaded = false;
+    });
+  $scope.openReseLink = function(article){
+    var link = article.gsx$url.$t;
+    window.open(link, '_blank', ''); return false;
+  }
+})
+
+.controller('ResearchTwoCtrl', function($scope, $http, $ionicPlatform){
+   $ionicPlatform.ready(function() {
+        if(window.Connection) {
+          if(navigator.connection.type == Connection.NONE) {
+            $scope.isLoaded = true;
+            $scope.isConnected = false;
+
+          } else {
+            $scope.isConnected = true;
+            
+          }
+      }
+   });
+   if(typeof analytics !== 'undefined') { analytics.trackView("Treatment Articles View"); }
+    var url = "https://spreadsheets.google.com/feeds/list/1PbXT9b2rwtxNVKY65IcIn8pNjU5x_7SZlvxBVJDMSeY/od6/public/values?alt=json";
+
+  $http.get(url)
+    .success(function(data, status, headers, config){
+      $scope.articles = data.feed.entry;
+      $scope.isLoaded = true;
+    })
+    .error(function(data, status, headers, config){
+      $scope.isLoaded = false;
+    });
+  $scope.openReseLink = function(article){
+    console.log('functoin');
+    var link = article.gsx$url.$t;
+    window.open(link, '_blank', ''); return false;
+  }
+})
+
+.controller('AdreThreeCtrl', function($scope, $http, $ionicLoading,  $ionicPlatform){
+    $ionicPlatform.ready(function() {
+        if(window.Connection) {
+          if(navigator.connection.type == Connection.NONE) {
+            $scope.isLoaded = true;
+            $scope.isConnected = false;
+
+          } else {
+            $scope.isConnected = true;
+            if(typeof analytics !== 'undefined') { analytics.trackView("Latest Research View"); }
+          }
+      }
+   });
+   if(typeof analytics !== 'undefined') { analytics.trackView("Support Groups View"); }
+    var url = "https://spreadsheets.google.com/feeds/list/1L57f3HKBM1tAz7-pa1idxi_IGgG5v0qDF91AFnCGpMY/od6/public/values?alt=json";
+
+  $http.get(url)
+    .success(function(data, status, headers, config){
+       $scope.groups = data.feed.entry;
+       $scope.isLoaded = true;
+    })
+    .error(function(data, status, headers, config){
+      $scope.isLoaded = false;
+    });
+})
+
+.controller('AdreFourCtrl', function($scope, $http,  $ionicPlatform){
+    $ionicPlatform.ready(function() {
+        if(window.Connection) {
+          if(navigator.connection.type == Connection.NONE) {
+            $scope.isLoaded = true;
+            $scope.isConnected = false;
+
+          } else {
+            $scope.isConnected = true;
+            if(typeof analytics !== 'undefined') { analytics.trackView("Latest Research View"); }
+          }
+      }
+   });
+   if(typeof analytics !== 'undefined') { analytics.trackView("FB Groups View"); }
+    var url = "https://spreadsheets.google.com/feeds/list/11tzCq3BUT_wPDzRML8yaEjCxh8ppSu0ZFQRKvxLdKQs/od6/public/values?alt=json";
+
+  $http.get(url)
+    .success(function(data, status, headers, config){
+       $scope.groups = data.feed.entry;
+        $scope.isLoaded = true;
+    })
+    .error(function(data, status, headers, config){
+        $scope.isLoaded = false;
+    });
+  $scope.openFBLink = function(group){
+    var link = group.gsx$url.$t;
+    window.open(link, '_system', ''); return false;
+  }
 });
-
-
+    

@@ -1,0 +1,28 @@
+<ion-view view-title="Advocate Resources" ng-controller="AdreFourCtrl">
+    <ion-content header-parallaxsub scroll-event-interval="5">
+        
+        <h1 class="sunleaf parallax-sub">Facebook Groups</h1>
+      
+       <ion-list>
+          <ion-item class="item-text-wrap" ng-repeat="group in groups">
+            <h3>{{group.gsx$name.$t}}</h3>
+            <p><strong>Language:</strong>{{group.gsx$language.$t}}</p>
+            <p><strong>Group Status:</strong> {{group.gsx$groupstatus.$t}}</p>
+             <a class="button button-block button-outline  button-positive icon-left ion-social-facebook-outline" href="#"  ng-click="openFBLink(group)">Visit Group</a>
+          </ion-item>
+        
+      
+        </ion-list>
+        <div class="padding white-background text-center">
+          <ion-spinner ng-if="!isLoaded" icon="lines" class="center spinner-balanced"></ion-spinner>
+        </div>
+              <div class="card" ng-if="!isConnected">
+             <div class="item item-text-wrap">
+                <h2 class="assertive">No Network Connection</h2>
+               <p>I'm sorry, but your device is not connected to a network. This section of the app requires an internet connection.</p>
+             </div>
+           </div>
+       
+    </ion-content>
+</ion-view>
+  

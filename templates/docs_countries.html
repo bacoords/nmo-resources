@@ -1,9 +1,9 @@
 <ion-view view-title="Find an Expert" ng-controller="DocCountriesCtrl">
-    <ion-content>
-        <h1 class="sunleaf">Find an Expert</h1>
+    <ion-content header-parallax scroll-event-interval="5">
+        <h1 class="sunleaf parallax">Find an Expert</h1>
 
            <ion-list ng-if="isConnected">
-            <ion-item href="#/app/docstates" class="item-icon-right">
+            <ion-item href="#/app/docstates" class="item-icon-right" ng-if="isLoaded">
                 <i class="icon ion-ios-arrow-right"></i>
                 United States
             </ion-item>
@@ -12,6 +12,11 @@
                   <i class="icon ion-ios-arrow-right"></i>
               </ion-item>
             </ion-list>
+           <div class="padding white-background"><br>
+             <div class="padding white-background text-center">
+              <ion-spinner ng-if="!isLoaded" icon="lines" class="center spinner-balanced"></ion-spinner>
+            </div>
+
            
             <div class="card" ng-if="!isConnected">
              <div class="item item-text-wrap">
@@ -19,7 +24,7 @@
                <p>I'm sorry, but your device is not connected to a network. This section of the app requires an internet connection.</p>
              </div>
            </div>
- 
+      </div>
 
     </ion-content>
 </ion-view>

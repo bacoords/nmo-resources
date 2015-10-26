@@ -1,6 +1,7 @@
-<ion-view view-title="Settings" ng-controller="SettingsCtrl">
+<ion-view hide-back-button="true" can-swipe-back="false" view-title="Settings" ng-controller="SettingsCtrl">
     <ion-content>
-        <h1 class="sunleaf">Settings</h1>
+<!--      <h1 class="h1-settings">Settings</h1>-->
+         <div class="white-background">
           <form name="settingsEditForm" method="post">
             <ul class="list">
               <li class="item item-toggle">
@@ -21,10 +22,41 @@
                    </div>
                  </label>
               </li>
+              <li class="item item-toggle">
+                 Remove Background Images
+                 <label class="toggle toggle-balanced">
+                   <input type="checkbox" ng-model="settings.bgImages">
+                   <div class="track">
+                     <div class="handle"></div>
+                   </div>
+                 </label>
+              </li>
             </ul>
-            <div class="padding">
-              <button type="button" class="button button-block button-outline button-balanced icon-right ion-ios-checkmark-outline" ng-click="saveSettings(settings.fontSize, settings.fontWeight)">Update</button>
+            <div class="row">
+             <div class="col">
+                <a class="button button-block button-outline button-assertive icon-right ion-ios-close-outline" href="#/app/main_page">Cancel</a>
+              </div>
+              <div class="col">
+                <button type="button" class="button button-block button-balanced icon-right ion-ios-checkmark-outline" ng-click="saveSettings(settings.fontSize, settings.fontWeight, settings.bgImages)">Update</button>
+              </div>
             </div>
+              
           </form>
+          
+          <br><br>
+          
+          
+          <br><br>
+          <div class="row" ng-show="isIOS">
+            <div class="col"><a class="button button-block button-clear button-balanced"  href="#" onclick="window.open('itms-apps://itunes.apple.com/us/app/nmo-resources/id1032001786?mt=8&uo=4', '_system', ''); return false;">Rate this app!</a>
+            </div>
+          </div>
+          
+           <div class="row" ng-show="isAndroid">
+            <div class="col"><a class="button button-block button-clear button-balanced"  href="#" onclick="window.open('market://details?id=app.nmoresource.gjcf', '_system', ''); return false;">Rate this app!</a>
+            </div>
+          </div>
+          </div>
     </ion-content>
 </ion-view>
+

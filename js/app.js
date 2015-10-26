@@ -4,24 +4,84 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'])
+angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9UIWebViewPatch'])
 
-  .run(function ($ionicPlatform, $cordovaSQLite, $ionicPopup) {
+  .directive('mainParallax', function($document) {
+
+  return {
+    restrict: 'A',
+    link: function($scope, $element, $attr) {
+      var resizeFactor, scrollFactor, blurFactor;
+      var paraheader = $document[0].body.querySelector(".welcome-parallax");
+      
+      $element.bind('scroll', function(e) {
+        if (e.detail.scrollTop >= 0) {
+          scrollFactor = e.detail.scrollTop/2;
+          paraheader.style[ionic.CSS.TRANSFORM] = 'translate3d(0, +' + scrollFactor + 'px, 0)';
+          blurFactor = 100 - (e.detail.scrollTop / 4);
+          if(blurFactor <= 100){
+            paraheader.style.webkitFilter = 'brightness('+blurFactor+'%)';
+          }
+        } else {
+        }
+      });
+    }
+  }
+})
+
+.directive('headerParallax', function($document) {
+
+
+  return {
+    restrict: 'A',
+    link: function($scope, $element, $attr) {
+      var resizeFactor, scrollFactor, blurFactor;
+      var paraheader = $document[0].body.querySelector(".parallax");
+      
+      $element.bind('scroll', function(e) {
+        if (e.detail.scrollTop >= 0) {
+          scrollFactor = e.detail.scrollTop/2;
+          paraheader.style[ionic.CSS.TRANSFORM] = 'translate3d(0, +' + scrollFactor + 'px, 0)';
+             blurFactor = 100 - (e.detail.scrollTop / 3);
+          if(blurFactor <= 100){
+            paraheader.style.webkitFilter = 'brightness('+blurFactor+'%)';
+          }
+        } else {
+     
+        }
+      });
+    }
+  }
+})
+
+.directive('headerParallaxsub', function($document) {
+ 
+  return {
+    restrict: 'A',
+    link: function($scope, $element, $attr) {
+      var resizeFactor, scrollFactor, blurFactor;
+      var header = $document[0].body.querySelector(".parallax-sub");
+      
+      $element.bind('scroll', function(e) {
+        if (e.detail.scrollTop >= 0) {
+          scrollFactor = e.detail.scrollTop/2;
+          header.style[ionic.CSS.TRANSFORM] = 'translate3d(0, +' + scrollFactor + 'px, 0)';
+             blurFactor = 100 - (e.detail.scrollTop / 3);
+          if(blurFactor <= 100){
+            header.style.webkitFilter = 'brightness('+blurFactor+'%)';
+          }
+        } else {
+        }
+      });
+    }
+  }
+})
+
+  .run(function ($ionicPlatform, $cordovaSQLite, $cordovaStatusbar, $ionicPopup) {
     $ionicPlatform.ready(function () {
 
-//      
-      
-        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-        // for form inputs)
-       // if (window.cordova && window.cordova.plugins.Keyboard) {
-       //     cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-     //       cordova.plugins.Keyboard.disableScroll(true);
+      $cordovaStatusbar.style(1);
 
-      //  }
-      if (window.StatusBar) {
-          // org.apache.cordova.statusbar required
-          StatusBar.styleDefault();
-      }
 //      db = window.openDatabase("my.db", "1.0", "Cordova Demo", 200000); //Development only
       db = $cordovaSQLite.openDB({ name: "my.db" }); //Production Only
       
@@ -38,11 +98,15 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'])
                  if( (res.rows.item(i).name === 'fontWeight') && (res.rows.item(i).value === 'true')){
                     document.documentElement.style.fontWeight = '700';
                  }
+                if( (res.rows.item(i).name === 'bgImages') && (res.rows.item(i).value === 'true')){
+                  
+               var sheet = document.createElement('style')
+                sheet.innerHTML = "h1.sunleaf, .welcome-parallax, .frnt-2 {background: #397633 !important;} .frnt-2 {height:auto !important; min-height:70px;}";
+                   sheet.id = 'bgImagesSheet';
+                document.body.appendChild(sheet);
+                 }  
               }
-          } else {
-//              document.documentElement.style.fontSize = "14px";
-//              document.documentElement.style.lineHeight = "16px";
-          }
+          } 
       }, function (err) {
           console.error(err);
       });
@@ -55,16 +119,14 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'])
                   content: "The internet is disconnected on your device. Some functionality may be limited."
               })
               .then(function(result) {
-//                        if(!result) {
-//                            ionic.Platform.exitApp();
-//                        }
+
               });
           }
       }
       
       
       //Initialize Analytics
-      if(typeof analytics !== undefined) {
+      if(typeof analytics !== 'undefined') {
           analytics.debugMode();
           analytics.startTrackerWithId('UA-23971517-7');
       } else {
@@ -94,22 +156,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'])
             views: {
                 'menuContent': {
                     templateUrl: 'templates/mainpage.html'
-                }
-            }
-        })
-        .state('app.search', {
-            url: '/search',
-            views: {
-                'menuContent': {
-                    templateUrl: 'templates/search.html'
-                }
-            }
-        })
-        .state('app.browse', {
-            url: '/browse',
-            views: {
-                'menuContent': {
-                    templateUrl: 'templates/browse.html'
                 }
             }
         })
@@ -249,14 +295,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'])
                 }
             }
         })
-        .state('app.doc_menu', {
-            url: '/doc_menu',
-            views: {
-                'menuContent': {
-                    templateUrl: 'templates/docs_menu.html'
-                }
-            }
-        })
         .state('app.doccountries', {
             url: '/doccountries',
             views: {
@@ -337,6 +375,54 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'])
                    }
                }
            })
+        .state('app.adre_menu', {
+            url: '/adre_menu',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/adre_menu.html'
+                }
+            }
+        })
+          .state('app.adre_one', {
+            url: '/adre_one',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/adre_one.html'
+                }
+            }
+        })
+          .state('app.adre_two', {
+            url: '/adre_two',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/adre_two.html'
+                }
+            }
+        })
+          .state('app.adre_three', {
+            url: '/adre_three',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/adre_three.html'
+                }
+            }
+        })
+          .state('app.adre_four', {
+            url: '/adre_four',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/adre_four.html'
+                }
+            }
+        })
+          .state('app.adre_five', {
+            url: '/adre_five',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/adre_five.html'
+                }
+            }
+        })
         .state('app.settings', {
                url: '/settings',
                views: {
