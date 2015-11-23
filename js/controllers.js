@@ -108,6 +108,47 @@ angular.module('starter.controllers', [])
     }
 })
 
+.factory('AboFactory', function() {
+  // Might use a resource here that returns a JSON array
+
+  // Some fake testing data
+  var abo = [
+            { id: 1, title : 'Definition', content : 'Neuromyelitis optica (NMO) is an uncommon disease syndrome of the central nervous system (CNS) that affects the optic nerves and spinal cord. Individuals with NMO develop optic neuritis, which causes pain in the eye and vision loss, and transverse myelitis, which causes weakness, numbness, and sometimes paralysis of the arms and legs, along with sensory disturbances and loss of bladder and bowel control. NMO leads to loss of myelin, which is a fatty substance that surrounds nerve fibers and helps nerve signals move from cell to cell. The syndrome can also damage nerve fibers and leave areas of broken-down tissue. In the disease process of NMO, for reasons that aren’t yet clear, immune system cells and antibodies attack and destroy myelin cells in the optic nerves and the spinal cord.' },
+           { id: 2, title : 'Basic Information', content : 'Historically, NMO was diagnosed in patients who experienced a rapid onset of blindness in one or both eyes, followed within days or weeks by varying degrees of paralysis in the arms and legs. In most cases, however, the interval between optic neuritis and transverse myelitis is significantly longer, sometimes as long as several years. After the initial attack, NMO follows an unpredictable course. Most individuals with the syndrome experience clusters of attacks months or years apart, followed by partial recovery during periods of remission. \n\n\n\nThis relapsing form of NMO primarily affects women. The female to male ratio is greater than 4:1. Another form of NMO, in which an individual only has a single, severe attack extending over a month or two, is most likely a distinct disease that affects men and women with equal frequency. The onset of NMO varies from childhood to adulthood, with two peaks, one in childhood and the other in adults in their 40s.' },
+           { id: 3, title : 'Historical Views on NMO', content : 'In the past, NMO was considered to be a severe variant of multiple sclerosis (MS) because both can cause attacks of optic neuritis and myelitis. Recent discoveries, however, suggest it is a separate disease. NMO is different from MS in the severity of its attacks and its tendency to solely strike the optic nerves and spinal cord at the beginning of the disease. Symptoms outside of the optic nerves and spinal cord are rare, although certain symptoms, including uncontrollable vomiting and hiccups, are now recognized as relatively specific symptoms of NMO that are due to brainstem involvement.\n\n\nThe recent discovery of an antibody in the blood of individuals with NMO gives doctors a reliable biomarker to distinguish NMO from MS. The antibody, known as NMO-IgG, seems to be present in about 70 percent of those with NMO and is not found in people with MS or other similar conditions.' },
+           { id: 4, title : 'Is there any treatment?', content : 'There is no cure for NMO, but there are therapies to treat an attack while it is happening, to reduce symptoms, and to prevent relapses. Doctors usually treat an initial attack of NMO with a combination of a corticosteroid drug (methylprednisolone) to stop the attack, and an immunosuppressive drug (azathioprine) for prevention of subsequent attacks. If frequent relapses occur, some individuals may need to continue a low dose of steroids for longer periods.\n\n\nPlasma exchange (plasmapheresis) is a technique that separates antibodies out of the blood stream and is used with people who are unresponsive to corticosteroid therapy. Pain, stiffness, muscle spasms, and bladder and bowel control problems can be managed with the appropriate medications and therapies.\n\n\nIndividuals with major disability will require the combined efforts of occupational therapists, physiotherapists, and social services professionals to address their complex rehabilitation needs.' },
+           { id: 5, title : 'References', content : 'Office of Communications and Public Liaison National Institute of Neurological Disorders and Stroke National Institutes of Health Bethesda, MD 20892\n\n\nNINDS health-related material is provided for information purposes only and does not necessarily represent endorsement by or an official position of the National Institute of Neurological Disorders and Stroke or any other Federal agency. Advice on the treatment or care of an individual patient should be obtained through consultation with a physician who has examined that patient or is familiar with that patient’s medical history.\n\n\nExcerpts taken from: NINDS Neuromyelitis Optica Information Page.' }
+    ]
+
+  return {
+    all: function() {
+      return abo;
+    },
+    remove: function(abo) {
+      abo.splice(abos.indexOf(abo), 1);
+    },
+    get: function(aboId) {
+      for (var i = 0; i < abo.length; i++) {
+        if (abo[i].id === parseInt(aboId)) {
+          return abo[i];
+        }
+      }
+      return null;
+    }
+  };
+})
+
+.controller('AbosCtrl', function($scope, AboFactory){
+    $scope.abos = AboFactory.all();
+})
+
+.controller('AboCtrl', function($scope, $sce, $stateParams, AboFactory){
+    $scope.abo = AboFactory.get($stateParams.aboid);
+//    if ($scope.abo.video){
+//        $scope.videourl = $sce.trustAsResourceUrl($scope.abo.video);
+//    }
+//   if(typeof analytics !== 'undefined') { analytics.trackView("ABout NMO Singles View"); }
+})
 
 .factory('CTFaqsFactory', function() {
   // Might use a resource here that returns a JSON array
@@ -144,7 +185,6 @@ angular.module('starter.controllers', [])
     }
   };
 })
-
 .controller('CTFaqsCtrl', function($scope, CTFaqsFactory){
     $scope.faqs = CTFaqsFactory.all();
    if(typeof analytics !== 'undefined') { analytics.trackView("Clinical Trials View"); }

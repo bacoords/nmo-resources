@@ -82,8 +82,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
 
       $cordovaStatusbar.style(1);
 
-//      db = window.openDatabase("my.db", "1.0", "Cordova Demo", 200000); //Development only
-      db = $cordovaSQLite.openDB({ name: "my.db" }); //Production Only
+      db = window.openDatabase("my.db", "1.0", "Cordova Demo", 200000); //Development only
+//      db = $cordovaSQLite.openDB({ name: "my.db" }); //Production Only
       
       $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS notes (id integer primary key, title text, content text, date text)");
       $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS settings (id integer primary key, name text, value text)");
@@ -172,6 +172,14 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             views: {
                 'menuContent': {
                     templateUrl: 'templates/about_one.html'
+                }
+            }
+        })
+        .state('app.about_one_single', {
+            url: '/about_one/:aboid',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/about_one_single.html'
                 }
             }
         })
