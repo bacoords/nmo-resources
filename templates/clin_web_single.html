@@ -1,0 +1,20 @@
+<ion-view view-title="Clinical Trials" ng-controller="CTWCtrl">
+    <ion-content class="padding">
+       <br>
+        <h1 class="gj-title">{{ctw.title}}</h1>
+        <BR>                
+        <div class="card" ng-if="ctw.video">
+            <div class="item embed-video" ng-if="ctw.video">
+                <iframe ng-src="{{videourl}}" frameborder="0" allowfullscreen></iframe>
+            </div>
+        
+        </div>
+        <BR>
+         <a class="button button-block button-outline button-balanced icon-left ion-ios-paper-outline"  href="#" ng-click="window.open('tel:+1{{ctw.pdf}}', '_system', '')" >Download Slides (PDF)</a>
+        <br>
+        <h2>Webinar Transcript</h2>
+        <span class="span-faq" style="white-space:pre-wrap" ng-bind-html="ctw.content"></span>
+        
+        <br><br>
+    </ion-content>
+</ion-view>

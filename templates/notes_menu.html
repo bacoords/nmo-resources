@@ -2,26 +2,20 @@
     <ion-content header-parallax scroll-event-interval="5">
         <h1 class="sunleaf parallax">My NMO Notes</h1>
          <div class="white-background">
+   
+
           <div class="padding">
             <button class="button button-block button-outline button-balanced icon-right ion-ios-plus-empty" ng-click="openAddModal()">New Note</button>
-<!--
-            <br><br>
-             <div class="list">
-
-              <div class="item item-input-inset">
-                <label class="item-input-wrapper">
-                  <input type="text" placeholder="Search Notes" ng-model="searchNotes.$">
-                </label>
-                <button class="button button-balanced button-small">
-                  Submit
-                </button>
-               </div>
-            </div>
--->
+       <div class="list list-inset">
+            <label class="item item-input">
+              <i class="icon ion-search placeholder-icon"></i>
+              <input type="text" placeholder="Search" ng-model="searchNotes">
+            </label>
+          </div>
           </div>
              
              <br>
-              <div ng-repeat="note in notes | orderBy:sortNote:true" class="card">
+              <div ng-repeat="note in notes | orderBy:sortNote:true | filter:searchNotes" class="card">
                <div class="item item-body">
                  <h3 class="margin-top-zero">{{note.title}}</h3>
                 <p style="white-space:pre-wrap;">{{note.content}}</p>

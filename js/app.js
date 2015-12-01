@@ -287,11 +287,35 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
                 }
             }
         })
-        .state('app.ctfaq', {
-            url: '/clin_menu/:faqid',
+        .state('app.clin_faq', {
+            url: '/clin_faq/',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/clin_menu_single.html'
+                    templateUrl: 'templates/clin_faq.html'
+                }
+            }
+        })
+        .state('app.clin_faq_single', {
+            url: '/clin_faq/:faqid',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/clin_faq_single.html'
+                }
+            }
+        })
+        .state('app.clin_web', {
+            url: '/clin_web/',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/clin_web.html'
+                }
+            }
+        })
+        .state('app.clin_web_single', {
+            url: '/clin_web/:ctwid',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/clin_web_single.html'
                 }
             }
         })

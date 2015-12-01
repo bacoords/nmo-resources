@@ -5,7 +5,7 @@
         <br>
          <div class="card">
             <div class="item embed-video">
-                <iframe ng-src="https://www.youtube.com/embed/8mi5de3jF14?controls=0&amp;showinfo=0&amp;rel=0" frameborder="0" allowfullscreen></iframe>
+                <iframe ng-src="https://www.youtube.com/embed/8mi5de3jF14?showinfo=0&amp;rel=0" frameborder="0" allowfullscreen></iframe>
             </div>
         
         </div>
@@ -17,9 +17,13 @@
            
 <!--        <h2 class="text-center">Clinical Trials FAQ</h2>    -->
         </div>
-        <ion-list ng-controller="CTFaqsCtrl">
-          <ion-item ng-repeat="faq in faqs" href="#/app/clin_menu/{{faq.id}}" class="item-icon-right item-text-wrap">
-            {{faq.title}}
+        <ion-list>
+          <ion-item  href="#/app/clin_faq/" class="item-icon-right item-text-wrap">
+            Clinical Trials FAQs
+              <i class="icon ion-ios-arrow-right"></i>
+          </ion-item>
+          <ion-item  href="#/app/clin_web/" class="item-icon-right item-text-wrap">
+            Clinical Trials Webinars
               <i class="icon ion-ios-arrow-right"></i>
           </ion-item>
         </ion-list>
