@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9UIWebViewPatch'])
 
-  .directive('mainParallax', function($document) {
+.directive('mainParallax', function($document) {
 
   return {
     restrict: 'A',
@@ -77,7 +77,46 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
   }
 })
 
-  .run(function ($ionicPlatform, $cordovaSQLite, $cordovaStatusbar, $ionicPopup) {
+.directive('elastic', [
+    '$timeout',
+    function($timeout) {
+        return {
+            restrict: 'A',
+            link: function($scope, element) {
+                $scope.initialHeight = $scope.initialHeight || element[0].style.height;
+                var resize = function() {
+                    element[0].style.height = $scope.initialHeight;
+                    element[0].style.height = "" + element[0].scrollHeight + "px";
+                };
+                element.on("input change", resize);
+                $timeout(resize, 0);
+            }
+        };
+    }
+])
+
+//.directive("contenteditable", function() {
+//  return {
+//    restrict: "A",
+//    require: "ngModel",
+//    link: function(scope, element, attrs, ngModel) {
+//
+//      function read() {
+//        ngModel.$setViewValue(element.html());
+//      }
+//
+//      ngModel.$render = function() {
+//        element.html(ngModel.$viewValue || "");
+//      };
+//
+//      element.bind("blur keyup change", function() {
+//        scope.$apply(read);
+//      });
+//    }
+//  };
+//})
+
+.run(function ($ionicPlatform, $cordovaSQLite, $cordovaStatusbar, $ionicPopup) {
     $ionicPlatform.ready(function () {
 
       $cordovaStatusbar.style(1);
@@ -135,10 +174,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
 
     });
 })
-
-
-
-
 
 .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
   
@@ -404,6 +439,14 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
                views: {
                    'menuContent': {
                        templateUrl: 'templates/notes_menu.html'
+                   }
+               }
+           })
+        .state('app.notesrev_menu', {
+               url: '/notesrev_menu',
+               views: {
+                   'menuContent': {
+                       templateUrl: 'templates/notesrev_menu.html'
                    }
                }
            })

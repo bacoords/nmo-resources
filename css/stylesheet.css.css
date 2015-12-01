@@ -367,4 +367,16 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .input-label {
   font-weight: bolder; }
 
+/* line 408, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+textarea {
+  min-height: 200px; }
+
+/* line 413, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+p.notes-prev {
+  white-space: pre-wrap;
+  height: 20px; }
+  /* line 416, C:/Users/User6/Documents/IonicFinal/www/css/stylesheet.css.scss */
+  p.notes-prev:after {
+    content: '...'; }
+
 /*# sourceMappingURL=stylesheet.css.css.map */

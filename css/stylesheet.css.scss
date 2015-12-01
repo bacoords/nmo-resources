@@ -405,3 +405,16 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
   font-weight: bolder;
 }
 
+textarea{
+  min-height: 200px;
+//  border:none;
+}
+
+p.notes-prev{
+  white-space:pre-wrap;
+  height:20px;
+  &:after{
+    content: '...';
+  }
+  
+}
