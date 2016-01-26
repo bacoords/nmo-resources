@@ -1,0 +1,34 @@
+<ion-view view-title="Notes" ng-controller="NotesRevCtrl">
+  <ion-content header-parallax scroll-event-interval="5">
+    <h1 class="sunleaf parallax">My NMO Notes</h1>
+    <div class="white-background">
+
+      <div class="padding">
+        <div class="button-bar">
+          <button class="button button-block button-outline button-balanced icon-left ion-ios-search-strong" ng-click="openSearchModal(notes)">Search Notes</button>
+          <a class="button button-block button-outline button-balanced icon-right ion-ios-plus-empty" href="#/app/notes_add_page">New Note</a>
+<!--          <button class="button button-block button-outline button-balanced icon-right ion-ios-plus-empty" ng-click="openAddModal()">New Note</button>-->
+        </div>
+      </div>
+
+      <ion-list can-swipe="true">
+        <ion-item ng-repeat="note in notes | orderBy:sortNote:true | filter:searchNotes" class="item-icon-right" ng-click="editNotePage(note.id, note.title, note.content)">
+
+          <h3 class="margin-top-zero">{{note.title}}</h3>
+          <p>{{trimCon(note.content)}}</p>
+          <!--          <h5>Last Saved: {{note.date | date:'EEE, MMM d h:mm a'}}</h5>-->
+          <h5>Last Saved: <span am-time-ago="note.date"></span></h5>
+          
+                <i class="icon ion-ios-arrow-right"></i>
+          <ion-option-button class="button-balanced" ng-click="editNotePage(note.id, note.title, note.content)">
+            View
+          </ion-option-button>
+          <ion-option-button class="button-assertive" ng-click="deleteNote(note)">
+            Delete
+          </ion-option-button>
+
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>
+</ion-view>

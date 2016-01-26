@@ -1,0 +1,42 @@
+<div class="modal">
+ <ion-modal-view>
+  <ion-header-bar align-title="center" class="bar-balanced">
+
+      <h1 class="title">Search Notes</h1>
+    </ion-header-bar>
+    <ion-header-bar class="bar-subheader bar-light  item-input-inset">
+      
+ 
+      <label class="item-input-wrapper">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Search" ng-model="searchNotes" maxlength="20">
+      </label>
+     <button class="button button-clear button-assertive" ng-click="closeSearchModal()">Close</button>
+    </ion-header-bar>
+    
+  <ion-content>
+    <div class="white-background">
+    <br>
+    <ion-list can-swipe="true" ng-if="searchNotes">
+        <ion-item ng-repeat="note in snotes | orderBy:sortNote:true | filter:searchNotes" class="" ng-click="editNotePage(note.id, note.title, note.content)">
+
+
+          <h3 class="margin-top-zero">{{note.title}}</h3>
+          <p  ng-bind-html="trimSearch(note.content, searchNotes)"></p>
+<!--          <h5>Last Saved: {{note.date | date:'EEE, MMM d h:mm a'}}</h5>-->
+          <h5>Last Saved: <span am-time-ago="note.date"></span></h5>
+
+          <ion-option-button class="button-balanced" ng-click="editNotePage(note.id, note.title, note.content)">
+            Open
+          </ion-option-button>
+          <ion-option-button class="button-assertive" ng-click="deleteNote(note)">
+            Delete
+          </ion-option-button>
+
+
+        </ion-item>
+      </ion-list>
+      </div>
+  </ion-content>
+</ion-modal-view>
+</div>

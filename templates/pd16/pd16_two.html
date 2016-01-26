@@ -1,0 +1,57 @@
+<ion-view view-title="Patient Day 2016" ng-controller="PD16TwoCtrl">
+    <ion-content header-parallaxsub scroll-event-interval="5">
+			<h1 class="sunleaf parallax-sub">Patient Day Agenda</h1>
+			<div class="white-background">
+				<div class="padding">
+					<p><em>This agenda should be considered tentative and subject to change.</em></p>
+				</div>
+				<ion-list ng-if="isLoaded" >
+					<ion-item class="item item-divider">
+						<strong>Tuesday, March 1</strong>
+					</ion-item>
+					<ion-item class="item-text-wrap" ng-repeat="item in items" ng-if="item.gsx$day.$t == 'Tuesday, March 1'">
+						<h3 class="gj-h3">{{item.gsx$title.$t}}</h3>
+						<p>{{item.gsx$timestart.$t}} - {{item.gsx$timeend.$t}}</p>
+						<p ng-if="item.gsx$location.$t">{{item.gsx$location.$t}}</p>
+						<br>
+						<p ng-if="item.gsx$speakers.$t">{{item.gsx$speakers.$t}}</p>
+						<p ng-if="item.gsx$description.$t">{{item.gsx$description.$t}}</p>
+						<a ng-if="item.gsx$link.$t" class="button button-block button-outline button-balanced icon-right ion-ios-arrow-right" href="{{item.gsx$link.$t}}">Learn More</a>
+					</ion-item>
+					<ion-item class="item item-divider">
+						<strong>Wednesday, March 2</strong>
+					</ion-item>
+					<ion-item class="item-text-wrap" ng-repeat="item in items" ng-if="item.gsx$day.$t == 'Wednesday, March 2'">
+						<h3 class="gj-h3">{{item.gsx$title.$t}}</h3>
+						<p>{{item.gsx$timestart.$t}} - {{item.gsx$timeend.$t}}</p>
+						<p ng-if="item.gsx$location.$t">{{item.gsx$location.$t}}</p>
+						<br>
+						<p ng-if="item.gsx$speakers.$t">{{item.gsx$speakers.$t}}</p>
+						<p ng-if="item.gsx$description.$t">{{item.gsx$description.$t}}</p>
+						<a ng-if="item.gsx$link.$t" class="button button-block button-outline button-balanced icon-right ion-ios-arrow-right" href="{{item.gsx$link.$t}}">Learn More</a>
+					</ion-item>
+					<ion-item class="item item-divider">
+						<strong>Thursday, March 3</strong>
+					</ion-item>
+					<ion-item class="item-text-wrap" ng-repeat="item in items" ng-if="item.gsx$day.$t == 'Thursday, March 3'">
+						<h3 class="gj-h3">{{item.gsx$title.$t}}</h3>
+						<p>{{item.gsx$timestart.$t}} - {{item.gsx$timeend.$t}}</p>
+						<p ng-if="item.gsx$location.$t">{{item.gsx$location.$t}}</p>
+						<br>
+						<p ng-if="item.gsx$speakers.$t">{{item.gsx$speakers.$t}}</p>
+						<p ng-if="item.gsx$description.$t">{{item.gsx$description.$t}}</p>
+						<a ng-if="item.gsx$link.$t" class="button button-block button-outline button-balanced icon-right ion-ios-arrow-right" href="{{item.gsx$link.$t}}">Learn More</a>
+					</ion-item>
+				</ion-list>
+				<div class="padding white-background text-center">
+					<ion-spinner ng-if="!isLoaded" icon="lines" class="center spinner-balanced"></ion-spinner>
+				</div>
+				<div class="card" ng-if="!isConnected">
+					<div class="item item-text-wrap">
+						<h2 class="assertive">No Network Connection</h2>
+						<p>I'm sorry, but your device is not connected to a network. This section of the app requires an internet connection.</p>
+					</div>
+				</div>
+			</div>
+    </ion-content>
+</ion-view>

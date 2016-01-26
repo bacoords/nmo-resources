@@ -1,6 +1,5 @@
 angular.module('starter.controllers', [])
 
-
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
 
 
@@ -1034,7 +1033,7 @@ angular.module('starter.controllers', [])
   }
   
   
-  $ionicModal.fromTemplateUrl('templates/vids_menu_modal.html', {
+  $ionicModal.fromTemplateUrl('templates/vids/vids_menu_modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
@@ -1049,7 +1048,7 @@ angular.module('starter.controllers', [])
   $scope.closeModal = function() {
     $scope.modal.hide();
     $scope.modal.remove();
-    $ionicModal.fromTemplateUrl('templates/vids_menu_modal.html', {
+    $ionicModal.fromTemplateUrl('templates/vids/vids_menu_modal.html', {
       scope: $scope,
       animation: 'slide-in-up'
     }).then(function(modal) {
@@ -1258,7 +1257,7 @@ angular.module('starter.controllers', [])
         console.error(err);
     });
   }
-   $ionicModal.fromTemplateUrl('templates/notes_edit_modal.html', {
+   $ionicModal.fromTemplateUrl('templates/notes/notes_edit_modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
@@ -1278,7 +1277,7 @@ angular.module('starter.controllers', [])
   $scope.closeEditModal = function() {
     $scope.editModal.hide();
     $scope.editModal.remove();
-    $ionicModal.fromTemplateUrl('templates/notes_edit_modal.html', {
+    $ionicModal.fromTemplateUrl('templates/notes/notes_edit_modal.html', {
       scope: $scope,
       animation: 'slide-in-up'
     }).then(function(modal) {
@@ -1290,7 +1289,7 @@ angular.module('starter.controllers', [])
     $scope.update(id, modalEditNoteTitle, modalEditNoteContent);
     $scope.editModal.hide();
     $scope.editModal.remove();
-    $ionicModal.fromTemplateUrl('templates/notes_edit_modal.html', {
+    $ionicModal.fromTemplateUrl('templates/notes/notes_edit_modal.html', {
       scope: $scope,
       animation: 'slide-in-up'
     }).then(function(modal) {
@@ -1361,7 +1360,7 @@ angular.module('starter.controllers', [])
         console.error(err);
     });
   }
-  $ionicModal.fromTemplateUrl('templates/notes_add_modal.html', {
+  $ionicModal.fromTemplateUrl('templates/notes/notes_add_modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
@@ -1376,7 +1375,7 @@ angular.module('starter.controllers', [])
     $scope.insert(modalAddNoteTitle, modalAddNoteContent);
     $scope.addModal.hide();
     $scope.addModal.remove();
-    $ionicModal.fromTemplateUrl('templates/notes_add_modal.html', {
+    $ionicModal.fromTemplateUrl('templates/notes/notes_add_modal.html', {
       scope: $scope,
       animation: 'slide-in-up'
     }).then(function(modal) {
@@ -1387,7 +1386,7 @@ angular.module('starter.controllers', [])
   $scope.closeAddModal = function() {
     $scope.addModal.hide();
     $scope.addModal.remove();
-    $ionicModal.fromTemplateUrl('templates/notes_add_modal.html', {
+    $ionicModal.fromTemplateUrl('templates/notes/notes_add_modal.html', {
       scope: $scope,
       animation: 'slide-in-up'
     }).then(function(modal) {
@@ -1402,9 +1401,101 @@ angular.module('starter.controllers', [])
   
 })
 
-.controller('NotesRevCtrl', function($scope, $ionicModal, $ionicPopup, $ionicListDelegate, $cordovaSQLite){
+.controller('NotesRevAddCtrl', function($scope, $ionicHistory, $ionicListDelegate, $cordovaSQLite){
+    $scope.addNote = {};
+  
+  //Height Issues
+  $scope.expandText = function(){
+    var element = document.getElementById("txtnotes");
+    element.style.height =  element.scrollHeight + "px";
+  }
+  $scope.$on('$ionicView.afterEnter',function(){
+      $scope.expandText();
+    });
+  
+  
+  $scope.closeAdd = function(){
+    $ionicHistory.goBack();
+  }
+  $scope.saveAndClose = function(title, content){
+     $scope.insert(title, content);
+     $scope.closeAdd();
+  }
+  
+  //Add New Note Functions
+  $scope.insert = function(title, content){  
+    console.log(title);
+    console.log(content);
+    
+    var ts = new Date();
+    var date = ts.toISOString();
+    var query = "INSERT INTO notes (title, content, date) VALUES (?,?,?)";
+    $cordovaSQLite.execute(db, query, [title, content, date]).then(function(res) {
+//        console.log("INSERT ID -> " + res.insertId);
+//        $scope.notes.push({id: res.insertId, title: title, content: content, date: date });
+
+    }, function (err) {
+        console.error(err);
+    });
+  }
+})
+
+.controller('NotesRevEditCtrl', function($scope, $ionicHistory, $ionicListDelegate, $stateParams, $cordovaSQLite){
+  $scope.editNote = {};
+  $scope.editNote.id = $stateParams.id;
+  $scope.editNote.title = $stateParams.title;
+  $scope.editNote.content = $stateParams.content;
+  
+  
+  
+  
+  //Height Issues
+  $scope.expandText = function(){
+    var element = document.getElementById("txtnotes");
+    element.style.height =  element.scrollHeight + "px";
+  }
+  $scope.$on('$ionicView.afterEnter',function(){
+      $scope.expandText();
+    });
+  
+  //CLose
+  $scope.closeAdd = function(){
+    $ionicHistory.goBack();
+  };
+  
+  //Save
+  $scope.saveEditPage = function(id, title, content) {
+    $scope.update(id, title, content);
+    $ionicHistory.goBack();
+  };
+  
+  //Edit Note Functions
+  $scope.update = function(id, title, content){
+    console.log(id);
+    console.log(title);
+    console.log(content);
+    
+    var ts = new Date();
+    var date = ts.toISOString();
+    var query = "UPDATE notes SET title =?, content =?, date =? WHERE id =?";
+    $cordovaSQLite.execute(db, query, [title, content, date, id]).then(function(res) {
+//        console.log("INSERT ID -> " + res.insertId);
+//      for (var i = 0; i < $scope.notes.length; i++){
+//        if ($scope.notes[i].id === id) {
+//          $scope.notes[i] = {id: id, title: title, content: content, date: date }
+//        }
+//      }
+    }, function (err) {
+        console.error(err);
+    });
+  }
+})
+
+.controller('NotesRevCtrl', function($scope, $state, $ionicModal, $ionicPopup, $ionicListDelegate, $cordovaSQLite){
 //  $scope.notes = NotesFactory.all();
   if(typeof analytics !== 'undefined') { analytics.trackView("Notes View"); }
+  
+
   $scope.notes = [];
   $scope.searchNotes = '';
   var query = "SELECT id, title, content, date FROM notes";
@@ -1437,64 +1528,77 @@ angular.module('starter.controllers', [])
     return date;
 };
 
-  //Edit Note Functions
-  $scope.update = function(id, title, content){
-    var ts = new Date();
-    var date = ts.toISOString();
-    var query = "UPDATE notes SET title =?, content =?, date =? WHERE id =?";
-    $cordovaSQLite.execute(db, query, [title, content, date, id]).then(function(res) {
-//        console.log("INSERT ID -> " + res.insertId);
-      for (var i = 0; i < $scope.notes.length; i++){
-        if ($scope.notes[i].id === id) {
-          $scope.notes[i] = {id: id, title: title, content: content, date: date }
-        }
-      }
-    }, function (err) {
-        console.error(err);
-    });
-  }
-   $ionicModal.fromTemplateUrl('templates/notes_edit_modal.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.editModal = modal;
-  });
   
-  $scope.editNote = function(id, title, content){
-        console.log(id);
-    console.log(title);
-    console.log(content);
-    $scope.editModal.modalEditNoteID = id;
-    $scope.editModal.modalEditNoteTitle = title;
-    $scope.editModal.modalEditNoteContent = content;
-    $scope.editModal.show();
-  }
-  //Close and Cancel Edit modal
-  $scope.closeEditModal = function() {
-    $scope.editModal.hide();
-    $scope.editModal.remove();
-    $ionicModal.fromTemplateUrl('templates/notes_edit_modal.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.editModal = modal;
-    });
-  };
-  //Close and Save addModal
-  $scope.saveEditModal = function(id, modalEditNoteTitle, modalEditNoteContent) {
-    $scope.update(id, modalEditNoteTitle, modalEditNoteContent);
-    $scope.editModal.hide();
-    $scope.editModal.remove();
-    $ionicModal.fromTemplateUrl('templates/notes_edit_modal.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.editModal = modal;
-    });
+  
+  //New Edit Link
+  $scope.editNotePage = function(id, title, content){
+    $state.go('app.notes_edit_page', {id: id, title: title, content: content});
   };
   
   
   
+//  
+//  
+//  
+//  //Edit Note Functions
+//  $scope.update = function(id, title, content){
+//    console.log(id);
+//    console.log(title);
+//    console.log(content);
+//    
+//    var ts = new Date();
+//    var date = ts.toISOString();
+//    var query = "UPDATE notes SET title =?, content =?, date =? WHERE id =?";
+//    $cordovaSQLite.execute(db, query, [title, content, date, id]).then(function(res) {
+////        console.log("INSERT ID -> " + res.insertId);
+//      for (var i = 0; i < $scope.notes.length; i++){
+//        if ($scope.notes[i].id === id) {
+//          $scope.notes[i] = {id: id, title: title, content: content, date: date }
+//        }
+//      }
+//    }, function (err) {
+//        console.error(err);
+//    });
+//  }
+//   $ionicModal.fromTemplateUrl('templates/notes_edit_modal.html', {
+//    scope: $scope,
+//    animation: 'slide-in-right'
+//  }).then(function(modal) {
+//    $scope.editModal = modal;
+//  });
+//  
+//  $scope.editNote = function(id, title, content){
+//    $scope.editModal.modalEditNoteID = id;
+//    $scope.editModal.modalEditNoteTitle = title;
+//    $scope.editModal.modalEditNoteContent = content;
+//    $scope.editModal.show();
+//  }
+//  //Close and Cancel Edit modal
+//  $scope.closeEditModal = function() {
+//    $scope.editModal.hide();
+//    $scope.editModal.remove();
+//    $ionicModal.fromTemplateUrl('templates/notes_edit_modal.html', {
+//      scope: $scope,
+//      animation: 'slide-in-right'
+//    }).then(function(modal) {
+//      $scope.editModal = modal;
+//    });
+//  };
+//  //Close and Save addModal
+//  $scope.saveEditModal = function(id, modalEditNoteTitle, modalEditNoteContent) {
+//    $scope.update(id, modalEditNoteTitle, modalEditNoteContent);
+//    $scope.editModal.hide();
+//    $scope.editModal.remove();
+//    $ionicModal.fromTemplateUrl('templates/notes_edit_modal.html', {
+//      scope: $scope,
+//      animation: 'slide-in-right'
+//    }).then(function(modal) {
+//      $scope.editModal = modal;
+//    });
+//  };
+//  
+//  
+//  
   
   
   
@@ -1524,77 +1628,135 @@ angular.module('starter.controllers', [])
   }
   
   
+//  
+//  
+//  //Share Functions
+//  $scope.shareNote = function(content, title){
+//    $cordovaSocialSharing
+//    .share(content, title, null, 'http://www.guthyjacksonfoundation.org') // Share via native share sheet
+//    .then(function(result) {
+//      // Success!
+//      console.log('Share Success');
+//    }, function(err) {
+//      // An error occured. Show a message to the user
+//    });
+//  }
+//  
+//  
   
+//  
+//  
+//  
+//  //Add New Note Functions
+//  $scope.insert = function(title, content){  
+//    console.log(title);
+//    console.log(content);
+//    
+//    var ts = new Date();
+//    var date = ts.toISOString();
+//    var query = "INSERT INTO notes (title, content, date) VALUES (?,?,?)";
+//    $cordovaSQLite.execute(db, query, [title, content, date]).then(function(res) {
+////        console.log("INSERT ID -> " + res.insertId);
+//        $scope.notes.push({id: res.insertId, title: title, content: content, date: date });
+//
+//    }, function (err) {
+//        console.error(err);
+//    });
+//  }
+//  $ionicModal.fromTemplateUrl('templates/notes_add_modal.html', {
+//    scope: $scope,
+//    animation: 'slide-in-up'
+//  }).then(function(modal) {
+//    $scope.addModal = modal;
+//  });
+//  //Opens Add Modal
+//  $scope.openAddModal = function() {
+//    $scope.addModalNote = {};
+//    $scope.addModal.show();
+//  };
+//  //Close and Save addModal
+//  $scope.saveAddModal = function(title, content) {
+//    console.log(title + ': ' + content);
+//    
+//    $scope.insert(title, content);
+//    $scope.addModal.hide();
+//    $scope.addModal.remove();
+//    $ionicModal.fromTemplateUrl('templates/notes_add_modal.html', {
+//      scope: $scope,
+//      animation: 'slide-in-up'
+//    }).then(function(modal) {
+//      $scope.addModal = modal;
+//    });
+//  };
+//  //Close and Cancel add modal
+//  $scope.closeAddModal = function() {
+//    $scope.addModal.hide();
+//    $scope.addModal.remove();
+//    $ionicModal.fromTemplateUrl('templates/notes_add_modal.html', {
+//      scope: $scope,
+//      animation: 'slide-in-up'
+//    }).then(function(modal) {
+//      $scope.addModal = modal;
+//    });
+//  };
+//  //Cleanup the modal when we're done with it!
+//  $scope.$on('$destroy', function() {
+//    $scope.addModal.remove();
+//  });
+//
+//  
   
-  //Share Functions
-  $scope.shareNote = function(content, title){
-    $cordovaSocialSharing
-    .share(content, title, null, 'http://www.guthyjacksonfoundation.org') // Share via native share sheet
-    .then(function(result) {
-      // Success!
-      console.log('Share Success');
-    }, function(err) {
-      // An error occured. Show a message to the user
-    });
-  }
-  
-  
-  
-  
-  
-  
-  //Add New Note Functions
-  $scope.insert = function(title, content){  
-    var ts = new Date();
-    var date = ts.toISOString();
-    var query = "INSERT INTO notes (title, content, date) VALUES (?,?,?)";
-    $cordovaSQLite.execute(db, query, [title, content, date]).then(function(res) {
-//        console.log("INSERT ID -> " + res.insertId);
-        $scope.notes.push({id: res.insertId, title: title, content: content, date: date });
-
-    }, function (err) {
-        console.error(err);
-    });
-  }
-  $ionicModal.fromTemplateUrl('templates/notes_add_modal.html', {
+  //Search Modal stuff
+  $ionicModal.fromTemplateUrl('templates/notes/notes_search_modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
-    $scope.addModal = modal;
+    $scope.searchModal = modal;
   });
-  //Opens Add Modal
-  $scope.openAddModal = function() {
-    $scope.addModal.show();
+  $scope.openSearchModal = function(notes) {
+    $scope.snotes = notes;
+    $scope.searchModal.show();
   };
-  //Close and Save addModal
-  $scope.saveAddModal = function(modalAddNoteTitle, modalAddNoteContent) {
-    $scope.insert(modalAddNoteTitle, modalAddNoteContent);
-    $scope.addModal.hide();
-    $scope.addModal.remove();
-    $ionicModal.fromTemplateUrl('templates/notes_add_modal.html', {
+  $scope.closeSearchModal = function() {
+    $scope.searchModal.hide();
+    $scope.searchModal.remove();
+    $ionicModal.fromTemplateUrl('templates/notes/notes_search_modal.html', {
       scope: $scope,
       animation: 'slide-in-up'
     }).then(function(modal) {
-      $scope.addModal = modal;
+      $scope.searchModal = modal;
     });
   };
-  //Close and Cancel add modal
-  $scope.closeAddModal = function() {
-    $scope.addModal.hide();
-    $scope.addModal.remove();
-    $ionicModal.fromTemplateUrl('templates/notes_add_modal.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.addModal = modal;
-    });
+  $scope.editSNote = function(id, title, content){
+//    $scope.closeSearchModal();
+    $scope.editNote(id, title, content);
   };
+
   //Cleanup the modal when we're done with it!
   $scope.$on('$destroy', function() {
-    $scope.addModal.remove();
+    $scope.searchModal.remove();
   });
-
   
+  $scope.trimSearch = function(content, search){
+    var uContent = content.toUpperCase();
+    var uSearch = search.toUpperCase();
+    var a = uContent.search(uSearch);
+    var g = '...';
+    if(a >= 0){
+      var b = a - 5;
+      var c = a - 1;
+      var d = a + search.length;
+      var e = d + 1;
+      var f = e + 26 - search.length;
+      var z = g.concat(content.substring(b, a),'<strong class="text-green">',content.substring(a, d),'</strong>',content.substring(d, f),g);
+      console.log(z);
+      return z;
+    }else{
+      var z = content.substring(0,33) + g;
+      return z;
+    }
+  };
+
 })
 
 .controller('MainPageCtrl', function($scope, $ionicLoading, $ionicHistory, $ionicScrollDelegate, $timeout, $ionicModal){
@@ -1604,6 +1766,17 @@ angular.module('starter.controllers', [])
 //  console.log($ionicHistory.viewHistory());
   });
 
+	//Set Date Expiration for PD16
+	$scope.showPatientDay = function(){
+		
+	$scope.currentDate = new Date();
+		$scope.expirationDate = new Date("March 5, 2016 01:15:00");
+		if ($scope.currentDate < $scope.expirationDate){
+			return true;
+		}
+		return false;
+	};
+	
 //  //Cleanup the modal when we're done with it!
 //  $scope.$on('$destroy', function() {
 //    $scope.modal.remove();
@@ -1636,6 +1809,11 @@ angular.module('starter.controllers', [])
 //  };
 //  
   
+})
+
+.controller('PD16OneCtrl', function($scope){
+	$scope.isIOS = ionic.Platform.isIOS();
+  $scope.isAndroid = ionic.Platform.isAndroid();
 })
 
 .controller('SettingsCtrl', function($scope, $state, $ionicPopup, $ionicHistory, $cordovaSQLite){
@@ -1836,11 +2014,10 @@ $ionicHistory.clearHistory();
 
           } else {
             $scope.isConnected = true;
-            if(typeof analytics !== 'undefined') { analytics.trackView("Latest Research View"); }
+					 if(typeof analytics !== 'undefined') { analytics.trackView("FB Groups View"); }
           }
       }
    });
-   if(typeof analytics !== 'undefined') { analytics.trackView("FB Groups View"); }
     var url = "https://spreadsheets.google.com/feeds/list/11tzCq3BUT_wPDzRML8yaEjCxh8ppSu0ZFQRKvxLdKQs/od6/public/values?alt=json";
 
   $http.get(url)
@@ -1855,5 +2032,65 @@ $ionicHistory.clearHistory();
     var link = group.gsx$url.$t;
     window.open(link, '_system', ''); return false;
   }
+})
+
+.controller('PD16TwoCtrl', function($scope, $http,  $ionicPlatform){
+    $ionicPlatform.ready(function() {
+        if(window.Connection) {
+          if(navigator.connection.type == Connection.NONE) {
+            $scope.isLoaded = true;
+            $scope.isConnected = false;
+
+          } else {
+            $scope.isConnected = true;
+            if(typeof analytics !== 'undefined') { analytics.trackView("PDAgenda View"); }
+          }
+      }
+   });
+
+    var url = "https://spreadsheets.google.com/feeds/list/119NigxaWOScPXX9Ni5lz6Hzr97FD_5Fsj9bjIbO3bCY/od6/public/values?alt=json";
+  $http.get(url)
+    .success(function(data, status, headers, config){
+       $scope.items = data.feed.entry;
+        $scope.isLoaded = true;
+    })
+    .error(function(data, status, headers, config){
+        $scope.isLoaded = false;
+    });
+//  $scope.openInAppLink = function(item){
+//    var link = item.gsx$link.$t;
+//    window.open(link, '_system', ''); return false;
+//  }
+})
+
+.controller('PD16ThreeCtrl', function($scope, $http,  $ionicPlatform){
+    $ionicPlatform.ready(function() {
+        if(window.Connection) {
+          if(navigator.connection.type == Connection.NONE) {
+            $scope.isLoaded = true;
+            $scope.isConnected = false;
+
+          } else {
+            $scope.isConnected = true;
+            if(typeof analytics !== 'undefined') { analytics.trackView("PDAgenda View"); }
+          }
+      }
+   });
+
+    var url = "https://spreadsheets.google.com/feeds/list/1xH3pEJe4QHC4ImqFqcuFSFGaCrSiOHRQvBVql70m7XQ/od6/public/values?alt=json";
+  $http.get(url)
+    .success(function(data, status, headers, config){
+       $scope.items = data.feed.entry;
+        $scope.isLoaded = true;
+    })
+    .error(function(data, status, headers, config){
+        $scope.isLoaded = false;
+    });
+//  $scope.openInAppLink = function(item){
+//    var link = item.gsx$link.$t;
+//    window.open(link, '_system', ''); return false;
+//  }
 });
+
+
     

@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9UIWebViewPatch'])
+angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9UIWebViewPatch', 'monospaced.elastic', 'angularMoment'])
 
 .directive('mainParallax', function($document) {
 
@@ -76,45 +76,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
     }
   }
 })
-
-.directive('elastic', [
-    '$timeout',
-    function($timeout) {
-        return {
-            restrict: 'A',
-            link: function($scope, element) {
-                $scope.initialHeight = $scope.initialHeight || element[0].style.height;
-                var resize = function() {
-                    element[0].style.height = $scope.initialHeight;
-                    element[0].style.height = "" + element[0].scrollHeight + "px";
-                };
-                element.on("input change", resize);
-                $timeout(resize, 0);
-            }
-        };
-    }
-])
-
-//.directive("contenteditable", function() {
-//  return {
-//    restrict: "A",
-//    require: "ngModel",
-//    link: function(scope, element, attrs, ngModel) {
-//
-//      function read() {
-//        ngModel.$setViewValue(element.html());
-//      }
-//
-//      ngModel.$render = function() {
-//        element.html(ngModel.$viewValue || "");
-//      };
-//
-//      element.bind("blur keyup change", function() {
-//        scope.$apply(read);
-//      });
-//    }
-//  };
-//})
 
 .run(function ($ionicPlatform, $cordovaSQLite, $cordovaStatusbar, $ionicPopup) {
     $ionicPlatform.ready(function () {
@@ -198,7 +159,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/about_menu',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/about_menu.html'
+                    templateUrl: 'templates/about/about_menu.html'
                 }
             }
         })
@@ -206,7 +167,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/about_one',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/about_one.html'
+                    templateUrl: 'templates/about/about_one.html'
                 }
             }
         })
@@ -214,7 +175,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/about_one/:aboid',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/about_one_single.html'
+                    templateUrl: 'templates/about/about_one_single.html'
                 }
             }
         })
@@ -222,7 +183,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/about_two',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/about_two.html'
+                    templateUrl: 'templates/about/about_two.html'
                 }
             }
         })
@@ -230,7 +191,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/faqs',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/about_three.html'
+                    templateUrl: 'templates/about/about_three.html'
                 }
             }
         })
@@ -238,7 +199,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/faqs/:faqid',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/about_three_single.html'
+                    templateUrl: 'templates/about/about_three_single.html'
                 }
             }
         })
@@ -246,7 +207,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/diag_menu',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/diag_menu.html'
+                    templateUrl: 'templates/diag/diag_menu.html'
                 }
             }
         })
@@ -254,7 +215,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/diag_one',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/diag_one.html'
+                    templateUrl: 'templates/diag/diag_one.html'
                 }
             }
         })
@@ -262,7 +223,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/diag_two',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/diag_two.html'
+                    templateUrl: 'templates/diag/diag_two.html'
                 }
             }
         })
@@ -270,7 +231,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/diag_three',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/diag_three.html'
+                    templateUrl: 'templates/diag/diag_three.html'
                 }
             }
         })
@@ -278,7 +239,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/diag_four',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/diag_four.html'
+                    templateUrl: 'templates/diag/diag_four.html'
                 }
             }
         })
@@ -286,7 +247,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/diag_five',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/diag_five.html'
+                    templateUrl: 'templates/diag/diag_five.html'
                 }
             }
         })
@@ -294,7 +255,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/rese_menu',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/rese_menu.html'
+                    templateUrl: 'templates/rese/rese_menu.html'
                 }
             }
         })
@@ -302,7 +263,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/rese_one',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/rese_one.html'
+                    templateUrl: 'templates/rese/rese_one.html'
                 }
             }
         })
@@ -310,7 +271,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/rese_two',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/rese_two.html'
+                    templateUrl: 'templates/rese/rese_two.html'
                 }
             }
         })
@@ -318,7 +279,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/clin_menu',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/clin_menu.html'
+                    templateUrl: 'templates/clin/clin_menu.html'
                 }
             }
         })
@@ -326,7 +287,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/clin_faq/',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/clin_faq.html'
+                    templateUrl: 'templates/clin/clin_faq.html'
                 }
             }
         })
@@ -334,7 +295,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/clin_faq/:faqid',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/clin_faq_single.html'
+                    templateUrl: 'templates/clin/clin_faq_single.html'
                 }
             }
         })
@@ -342,7 +303,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/clin_web/',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/clin_web.html'
+                    templateUrl: 'templates/clin/clin_web.html'
                 }
             }
         })
@@ -350,7 +311,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/clin_web/:ctwid',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/clin_web_single.html'
+                    templateUrl: 'templates/clin/clin_web_single.html'
                 }
             }
         })
@@ -358,7 +319,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/docstates',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/docs_states.html'
+                    templateUrl: 'templates/docs/docs_states.html'
                 }
             }
         })
@@ -366,7 +327,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/doccountries',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/docs_countries.html'
+                    templateUrl: 'templates/docs/docs_countries.html'
                 }
             }
         })
@@ -374,7 +335,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/docstates/:statename',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/docs_state.html'
+                    templateUrl: 'templates/docs/docs_state.html'
                 }
             }
         })
@@ -382,7 +343,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/doccountries/:countryname',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/docs_country.html'
+                    templateUrl: 'templates/docs/docs_country.html'
                 }
             }
         })
@@ -390,7 +351,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/blood_menu',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/blood_menu.html'
+                    templateUrl: 'templates/blood/blood_menu.html'
                 }
             }
         })
@@ -398,7 +359,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/blood_one',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/blood_one.html'
+                    templateUrl: 'templates/blood/blood_one.html'
                 }
             }
         })
@@ -406,7 +367,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/blood_two',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/blood_two.html'
+                    templateUrl: 'templates/blood/blood_two.html'
                 }
             }
         })
@@ -422,7 +383,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
                url: '/vids_menu',
                views: {
                    'menuContent': {
-                       templateUrl: 'templates/vids_menu.html'
+                       templateUrl: 'templates/vids/vids_menu.html'
                    }
                }
            })
@@ -430,7 +391,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
                url: '/vids_menu/:category',
                views: {
                    'menuContent': {
-                       templateUrl: 'templates/vids_menu_single.html'
+                       templateUrl: 'templates/vids/vids_menu_single.html'
                    }
                }
            })
@@ -438,15 +399,33 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
                url: '/notes_menu',
                views: {
                    'menuContent': {
-                       templateUrl: 'templates/notes_menu.html'
+                       templateUrl: 'templates/notes/notes_menu.html'
                    }
                }
            })
         .state('app.notesrev_menu', {
                url: '/notesrev_menu',
+               cache: false,
                views: {
                    'menuContent': {
-                       templateUrl: 'templates/notesrev_menu.html'
+                       templateUrl: 'templates/notes/notesrev_menu.html'
+                   }
+               }
+           })
+        .state('app.notes_add_page', {
+               url: '/notes_add_page',
+               views: {
+                   'menuContent': {
+                       templateUrl: 'templates/notes/notes_add_page.html'
+                   }
+               }
+           })
+        .state('app.notes_edit_page', {
+               url: '/notes_edit_page/:id/:title/:content',
+//               params: ['id', 'title', 'content'],
+               views: {
+                   'menuContent': {
+                       templateUrl: 'templates/notes/notes_edit_page.html'
                    }
                }
            })
@@ -454,7 +433,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/adre_menu',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/adre_menu.html'
+                    templateUrl: 'templates/adre/adre_menu.html'
                 }
             }
         })
@@ -462,7 +441,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/adre_one',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/adre_one.html'
+                    templateUrl: 'templates/adre/adre_one.html'
                 }
             }
         })
@@ -470,7 +449,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/adre_two',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/adre_two.html'
+                    templateUrl: 'templates/adre/adre_two.html'
                 }
             }
         })
@@ -478,7 +457,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/adre_three',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/adre_three.html'
+                    templateUrl: 'templates/adre/adre_three.html'
                 }
             }
         })
@@ -486,7 +465,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/adre_four',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/adre_four.html'
+                    templateUrl: 'templates/adre/adre_four.html'
                 }
             }
         })
@@ -494,7 +473,63 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             url: '/adre_five',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/adre_five.html'
+                    templateUrl: 'templates/adre/adre_five.html'
+                }
+            }
+        })
+        .state('app.pd16_menu', {
+            url: '/pd16_menu',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/pd16/pd16_menu.html'
+                }
+            }
+        })
+        .state('app.pd16_one', {
+            url: '/pd16_one',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/pd16/pd16_one.html'
+                }
+            }
+        })
+        .state('app.pd16_two', {
+            url: '/pd16_two',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/pd16/pd16_two.html'
+                }
+            }
+        })
+        .state('app.pd16_three', {
+            url: '/pd16_three',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/pd16/pd16_three.html'
+                }
+            }
+        })
+        .state('app.pd16_four', {
+            url: '/pd16_four',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/pd16/pd16_four.html'
+                }
+            }
+        })
+        .state('app.pd16_five', {
+            url: '/pd16_five',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/pd16/pd16_five.html'
+                }
+            }
+        })
+        .state('app.pd16_six', {
+            url: '/pd16_six',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/pd16/pd16_six.html'
                 }
             }
         })

@@ -1,0 +1,28 @@
+<ion-view view-title="Patient Day 2016" ng-controller="PD16OneCtrl">
+    <ion-content header-parallaxsub scroll-event-interval="5">
+        <h1 class="sunleaf parallax-sub">Patient Day Information</h1>
+        <div class="padding white-background">
+        	<p>An emotional and empowering experience you’ll never forget. Enjoy the chance to ask leading NMO clinicians and researchers a question, participate in multiple breakout sessions, make new lifelong friends or reunite with old ones, and be part of the NMO cure by donating blood and data to the NMO Biorepository.</p>
+        	<div class="row">
+        		<div class="col">
+        			<a class="button button-outline button-balanced" href="#" onclick="window.open('https://www.regonline.com/7thNMOPD', '_system', ''); return false;">Register Now</a>
+        		</div>
+        	</div>
+					<h2 class="gj-h2">Date </h2>
+					<p>Wednesday, March 02, 2016 7:00 AM – 5:00 PM (Pacific Time)</p>
+					<h2 class="gj-h2">Location </h2>
+					<p>Hilton Los Angeles Airport Hotel</p>
+					<p>5711 West Century Blvd.</p>
+					<p>Los Angeles, California 90045 United States</p>
+      		<div class="row" ng-show="isAndroid">
+      			<div class="col">
+							<a ng-href="geo://33.946049,-118.381682?q=33.946049,-118.381682(Hilton Los Angeles Airport)" class="button button-outline button-balanced">Open in Google Maps</a>
+      			</div>
+      		<div class="row" ng-show="isIOS">
+      			<div class="col">
+							<a ng-href="http://maps.apple.com/?address=5711+West+Century+Blvd.,Los Angeles,California,90045&q=Hilton+Los+Angeles+Airport" class="button button-outline button-balanced">Open in Maps</a>
+      			</div>
+      		</div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,28 @@
+<ion-view view-title="Edit Note" ng-controller="NotesRevEditCtrl">
+    <ion-header-bar align-title="center" class="bar-light bar-subheader">
+      <div class="buttons">
+        <button class="button button-outline button-assertive" ng-click="closeAdd()">Cancel</button>
+      </div>
+      <h2 class="title">Add Note</h2>
+      <div class="buttons">
+        <button type="button" class="button button-outline button-balanced" ng-click="saveEditPage(editNote.id, editNote.title, editNote.content)">Save</button>
+      </div>
+    </ion-header-bar>
+
+    <ion-content class="has-subheader">
+      <form name="modalAddForm" method="post">
+        <div class="list">
+          <label class="item item-input item-floating-label">
+            <span class="input-label">Title</span>
+            <input type="text" placeholder="Title" ng-model="editNote.title" class="note-title">
+          </label>
+          <label class="item item-input item-floating-label">
+            <span class="input-label">Note</span>
+            <textarea msd-elastic placeholder="Note" ng-model="editNote.content" rows="10"></textarea>
+          </label>
+        </div>
+        <br>
+        <br>
+      </form>
+    </ion-content>
+</ion-view>
