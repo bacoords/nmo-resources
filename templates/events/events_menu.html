@@ -1,0 +1,25 @@
+<ion-view view-title="Events" ng-controller="EventsMenuCtrl">
+    <ion-content header-parallax scroll-event-interval="5">
+        <h1 class="sunleaf sunleaf__events parallax">Events</h1>
+        <ion-list>
+  
+            <ion-item ng-repeat="item in items" ng-if="isLoaded" class="item-text-wrap">
+              <h3>{{item.title.rendered}}</h3>  
+              <p><strong>Location: </strong> {{item._gjcf_events_venue_name}}</p>  
+              <p><strong>Date: </strong> {{parseDate(item._gjcf_events_date)}}</p>
+              <br> 
+              <button class="button button-block button-outline button-balanced" ng-click="openLink(item)">View Event</button>
+            </ion-item>
+            
+        </ion-list>
+				<div class="padding white-background text-center">
+					<ion-spinner ng-if="!isLoaded" icon="lines" class="center spinner-balanced"></ion-spinner>
+				</div>
+ 				<div class="card" ng-if="!isConnected">
+					<div class="item item-text-wrap">
+						<h2 class="assertive">No Network Connection</h2>
+						<p>I'm sorry, but your device is not connected to a network. This section of the app requires an internet connection.</p>
+					</div>
+				</div>
+    </ion-content>
+</ion-view>

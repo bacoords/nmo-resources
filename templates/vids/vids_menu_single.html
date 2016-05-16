@@ -1,6 +1,6 @@
 <ion-view view-title="Videos" ng-controller="VidCtrl">
   <ion-content header-parallaxsub scroll-event-interval="5">
-    <h1 class="sunleaf parallax-sub">{{category}}</h1>
+    <h1 class="sunleaf sunleaf__vids parallax-sub">{{category}}</h1>
     <div class="padding white-background">
       <div ng-repeat="vid in vidlist" class="row margin-bottom" ng-click="openModal(vid.videourl, vid.title)">
        

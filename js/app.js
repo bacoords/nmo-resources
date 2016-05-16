@@ -82,8 +82,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
 
       $cordovaStatusbar.style(1);
 
-      db = window.openDatabase("my.db", "1.0", "Cordova Demo", 200000); //Development only
-//      db = $cordovaSQLite.openDB({ name: "my.db" }); //Production Only
+//      db = window.openDatabase("my.db", "1.0", "Cordova Demo", 200000); //Development only
+      db = $cordovaSQLite.openDB({ name: "my.db" }); //Production Only
       
       $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS notes (id integer primary key, title text, content text, date text)");
       $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS settings (id integer primary key, name text, value text)");
@@ -474,6 +474,54 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
             views: {
                 'menuContent': {
                     templateUrl: 'templates/adre/adre_five.html'
+                }
+            }
+        })
+        .state('app.events_menu', {
+            url: '/events_menu',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/events/events_menu.html'
+                }
+            }
+        })
+        .state('app.rt8_menu', {
+            url: '/rt8_menu',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/rt8/rt8_menu.html'
+                }
+            }
+        })
+        .state('app.rt8_one', {
+            url: '/rt8_one',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/rt8/rt8_one.html'
+                }
+            }
+        })
+        .state('app.rt8_two', {
+            url: '/rt8_two',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/rt8/rt8_two.html'
+                }
+            }
+        })
+        .state('app.rt8_three', {
+            url: '/rt8_three',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/rt8/rt8_three.html'
+                }
+            }
+        })
+        .state('app.rt8_three_single', {
+            url: '/rt8_three_single/:item',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/rt8/rt8_three_single.html'
                 }
             }
         })

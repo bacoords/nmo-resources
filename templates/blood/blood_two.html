@@ -1,81 +1,35 @@
-<ion-view view-title="Blood Bank">
+<ion-view view-title="Blood Bank" ng-controller="BloodTwoCtrl">
     <ion-content header-parallaxsub scroll-event-interval="5">
-        <h1 class="sunleaf parallax-sub">Draw Sites</h1>
+        <h1 class="sunleaf sunleaf__blood parallax-sub">Draw Sites</h1>
         <div class="white-background">
-        <img src="img/map.png" class="full-width"><br>
-        <ion-list>
-            <ion-item>
-                <h2 class="gj-h2">Western Region</h2>
+        <img src="img/mapupdated.png" class="full-width" alt="Blood Bank Map">
+           <ion-list ng-show="isConnected">
+            <ion-item ng-repeat="item in items">
+                <h2 class="gj-h2">Region - {{item[9]}}</h2>
                 <div>
                     <p>
-                        <strong>Stanford University</strong>
+                        <strong>{{item[4]}}</strong>
                     </p>
-                    <p>Dr. May Han</p>
-                    <p>Stanford, California</p>
-                    <p>Please contact Mike Feng,</p>
+                    <p>{{item[5]}}</p>
+                    <p>{{item[0]}}</p>
+                    <p>Please contact {{item[6]}},</p>
                     <p>Clinical Research Coordinator</p>
                     <p>
-                        <a class="button button-block button-outline button-balanced icon-left ion-ios-telephone-outline"  href="#" onclick="window.open('tel:+16505295935', '_system', ''); return false;">650-529-5935 (Office)</a>
+                        <a class="button button-block button-outline button-balanced icon-left ion-ios-telephone-outline"  href="#" onclick="window.open('tel:+{{item[7]}}', '_system', ''); return false;">{{item[7]}} (Office)</a>
                     </p>
                     <p>
-                        <a class="button button-block button-outline button-balanced icon-left ion-ios-email-outline"  href="#" onclick="window.open('mailto:fengh@stanford.edu', '_system', ''); return false;">fengh@stanford.edu</a>
+                        <a class="button button-block button-outline button-balanced icon-left ion-ios-email-outline"  href="#" onclick="window.open('mailto:{{item[8]}}', '_system', ''); return false;">{{item[8]}}</a>
                     </p>
                 </div>
             </ion-item>
-            <ion-item>
-                <h2 class="gj-h2">Central Region</h2>
-                <div>
-                    <p>
-                        <strong>University of Colorado, Denver</strong>
-                    </p>
-                    <p>Dr. Jeffrey Bennett</p>
-                    <p>Denver, Colorado</p>
-                    <p>Please contact Ruth Johnson,</p>
-                    <p>Professional Research Assistant</p>
-                    <p>
-                        <a class="button button-block button-outline button-balanced icon-left ion-ios-telephone-outline"   href="#" onclick="window.open('tel:+13037247885', '_system', ''); return false;">303-724-7885 (Office)</a>
-                    </p>
-                    <p>
-                        <a class="button button-block button-outline button-balanced icon-left ion-ios-email-outline"  href="#" onclick="window.open('mailto:ruth.johnson@ucdenver.edu', '_system', ''); return false;">ruth.johnson@ucdenver.edu</a>
-                    </p>
-                </div>
-            </ion-item>
-            <ion-item>
-                <h2 class="gj-h2">Eastern Region</h2>
-                <div>
-                    <p>
-                        <strong>Johns Hopkins</strong>
-                    </p>
-                    <p>Dr. Michael Levy</p>
-                    <p>Baltimore, Maryland</p>
-                    <p>Please contact Jessica Coleman</p>
-                    <p>
-                        <a class="button button-block button-outline button-balanced icon-left ion-ios-telephone-outline"   href="#" onclick="window.open('tel:+14106147856', '_system', ''); return false;">410-614-7856 (Office)</a>
-                    </p>
-                    <p>
-                        <a class="button button-block button-outline button-balanced icon-left ion-ios-email-outline"  href="#" onclick="window.open('mailto:jcolem52@jhmi.edu', '_system', ''); return false;">rbrock1@jhmi.edu</a>
-                    </p>
-                </div>
-            </ion-item>
-            <ion-item>
-                <h2 class="gj-h2">Canada</h2>
-                <div>
-                    <p>
-                        <strong>University of British Columbia</strong>
-                    </p>
-                    <p>Dr. Anthony Traboulsee</p>
-                    <p>Vancouver, BC Canada</p>
-                    <p>Please contact Alice Lee,</p>
-                    <p>Clinical Research Coordinator</p>
-                    <p>
-                        <a class="button button-block button-outline button-balanced icon-left ion-ios-telephone-outline"  href="#" onclick="window.open('tel:+16048227752', '_system', ''); return false;">604-822-7752 (Office)</a>
-                    </p>
-                    <p>
-                        <a class="button button-block button-outline button-balanced icon-left ion-ios-email-outline"  href="#" onclick="window.open('mailto:alice@msmri.medicine.ubc.ca', '_system', ''); return false;">alice@msmri.medicine.ubc.ca</a>
-                    </p>
-                </div>
-            </ion-item>
+
         </ion-list>
+        <div class="card" ng-if="!isConnected">
+             <div class="item item-text-wrap">
+                <h2 class="assertive">No Network Connection</h2>
+               <p>I'm sorry, but your device is not connected to a network. This section of the app requires an internet connection in order to provide the most updated information.</p>
+             </div>
+           </div>
       </div>
     </ion-content>
 </ion-view>

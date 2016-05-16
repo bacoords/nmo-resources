@@ -1,8 +1,25 @@
-<ion-view view-title="Patient Day 2016">
-    <ion-content header-parallaxsub scroll-event-interval="5">
-        <h1 class="sunleaf parallax-sub">Patient Day Maps</h1>
+<ion-view view-title="Patient Day 2016" ng-controller="PD16FourCtrl">
+    <ion-content>
+        <h1 class="gj-title padding">Patient Day Maps</h1>
         <div class="padding white-background">
-        	<p>Coming Soon.</p>
-
+           <div class="card"  ng-repeat="item in items">
+               <div class="item item-image">
+                 
+                <img ng-src="{{item.gsx$src.$t}}" ng-click="showImages($index)" class="image-list-thumb"/>
+               </div>
+                <div class="item item-divider">
+                  {{item.gsx$name.$t}}
+                </div>  
+         
+          </div>
+				<div class="padding white-background text-center">
+					<ion-spinner ng-if="!isLoaded" icon="lines" class="center spinner-balanced"></ion-spinner>
+				</div>
+				<div class="card" ng-if="!isConnected">
+					<div class="item item-text-wrap">
+						<h2 class="assertive">No Network Connection</h2>
+						<p>I'm sorry, but your device is not connected to a network. This section of the app requires an internet connection.</p>
+					</div>
+				</div>
     </ion-content>
 </ion-view>

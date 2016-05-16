@@ -1,6 +1,6 @@
 <ion-view view-title="Videos" ng-controller="CatsCtrl">
     <ion-content header-parallax scroll-event-interval="5">
-        <h1 class="sunleaf parallax">Videos</h1>
+        <h1 class="sunleaf sunleaf__vids parallax">Videos</h1>
 
            <ion-list ng-if="isConnected">
               <ion-item ng-repeat="cat in cats" href="#/app/vids_menu/{{cat.catid}}" class="item-icon-right">

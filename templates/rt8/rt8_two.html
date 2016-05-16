@@ -1,21 +1,21 @@
-<ion-view view-title="Patient Day 2016" ng-controller="PD16ThreeCtrl">
+<ion-view view-title="Roundtable Conference" ng-controller="RT8OneCtrl">
     <ion-content>
-			<h1 class="gj-title padding">Breakout Sessions</h1>
+			<h1 class="gj-title padding">Roundtable Conference Agenda</h1>
 			<div class="white-background">
 				<div class="padding">
 					<p><em>This agenda should be considered tentative and subject to change.</em></p>
-					<p>Breakout Sessions will take place on March 2 between 1:30pm and 3:20pm. Each session will be repeated three times. Sessions will be filmed and published on the foundations website.</p>
-					<h2 class="gj-h2">List of Breakout Sessions</h2>
 				</div>
-				<ion-list>
-					<ion-item class="item-text-wrap" ng-repeat="item in items">
+				<h3 class="padding">Tuesday, March 1</h3>
+       <BR><BR>
+        <ion-list ng-if="isLoaded">
+					<ion-item ng-repeat="item in items" ng-if="item.gsx$day.$t == 'Tuesday, March 1'" ng-class="item.gsx$type.$t">
 						<h3 class="gj-h3">{{item.gsx$title.$t}}</h3>
-						<BR>
+						<p ng-if="item.gsx$timestart.$t">{{item.gsx$timestart.$t}} - {{item.gsx$timeend.$t}}</p>
 						<p ng-if="item.gsx$location.$t">{{item.gsx$location.$t}}</p>
-						<br>
+						<br ng-if="item.gsx$type.$t == 'item-text-wrap'">
 						<p ng-if="item.gsx$speakers.$t">{{item.gsx$speakers.$t}}</p>
 						<p ng-if="item.gsx$description.$t">{{item.gsx$description.$t}}</p>
-<!--						<a ng-if="item.gsx$link.$t" class="button button-block button-outline button-balanced" href="#" ng-click="openInAppLink(item)">Learn More</a>-->
+						<a ng-if="item.gsx$link.$t" class="button button-block button-outline button-balanced icon-right ion-ios-arrow-right" href="{{item.gsx$link.$t}}">Learn More</a>
 					</ion-item>
 				</ion-list>
 				<div class="padding white-background text-center">
@@ -26,11 +26,6 @@
 						<h2 class="assertive">No Network Connection</h2>
 						<p>I'm sorry, but your device is not connected to a network. This section of the app requires an internet connection.</p>
 					</div>
-				</div>
-				<div class="padding">
-					<br>
-						<a class="button button-block button-outline button-balanced" href="#/app/pd16_two">View Entire Day Agenda</a>
-					<br>
 				</div>
 			</div>
     </ion-content>

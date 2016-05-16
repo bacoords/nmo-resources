@@ -1,0 +1,24 @@
+<ion-view view-title="Roundtable Conference" ng-controller="RT8ThreeCtrl">
+
+    <ion-content>
+			<h1 class="gj-title padding">Roundtable Conference Posters</h1>
+			<div class="white-background">
+
+        <ion-list ng-if="isLoaded">
+					<ion-item ng-repeat="item in items track by $index" class="item item-icon-right item-text-wrap" href="#/app/rt8_three_single/{{$index}}">
+						{{item.gsx$title.$t}}
+              <i class="icon ion-ios-arrow-right"></i>
+					</ion-item>
+				</ion-list>
+				<div class="padding white-background text-center">
+					<ion-spinner ng-if="!isLoaded" icon="lines" class="center spinner-balanced"></ion-spinner>
+				</div>
+				<div class="card" ng-if="!isConnected">
+					<div class="item item-text-wrap">
+						<h2 class="assertive">No Network Connection</h2>
+						<p>I'm sorry, but your device is not connected to a network. This section of the app requires an internet connection.</p>
+					</div>
+				</div>
+			</div>
+    </ion-content>
+</ion-view>
