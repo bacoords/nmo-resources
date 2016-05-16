@@ -3,19 +3,11 @@
         <h1 class="sunleaf sunleaf__vids parallax">Videos</h1>
 
            <ion-list ng-if="isConnected">
-              <ion-item ng-repeat="cat in cats" href="#/app/vids_menu/{{cat.id}}/{{cat.name}}" class="item-icon-right">
-                 <span ng-bind-html="cat.name"></span> 
+              <ion-item ng-repeat="cat in cats" href="#/app/vids_menu/{{cat.catid}}" class="item-icon-right">
+                  {{cat.category}}
                   <i class="icon ion-ios-arrow-right"></i>
               </ion-item>
             </ion-list>
-            
-              <ion-infinite-scroll
-                 ng-if="isMore"
-                on-infinite="loadMore()"
-                distance="1%"
-                spinner="lines">
-              </ion-infinite-scroll>
-            
             <div class="padding white-background"><br>
                   <div class="card" ng-if="!isConnected">
                    <div class="item item-text-wrap">

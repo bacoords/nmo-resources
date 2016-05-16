@@ -1,14 +1,14 @@
 <ion-view view-title="Videos" ng-controller="VidCtrl">
   <ion-content header-parallaxsub scroll-event-interval="5">
-    <h1 class="sunleaf sunleaf__vids parallax-sub">{{pageTitle}}</h1>
+    <h1 class="sunleaf sunleaf__vids parallax-sub">{{category}}</h1>
     <div class="padding white-background">
-      <div ng-repeat="vid in vids" class="row margin-bottom" ng-click="openModal(vid._gjcf_videos_url, vid.title.rendered)">
+      <div ng-repeat="vid in vidlist" class="row margin-bottom" ng-click="openModal(vid.videourl, vid.title)">
        
          <div class="col-33">
-           <img ng-src="{{vid._gjcf_videos_thumb}}" alt="Video Thumbnail" class="yt-thumb">
+           <img ng-src="{{vid.thumburl}}" alt="Video Thumbnail" class="yt-thumb">
          </div>
          <div class="col-67 padding-left">
-          <p class="yt-title" ng-bind-html="vid.title.rendered"></p>
+          <p class="yt-title">{{vid.title}}</p>
 <!--           <a href="#" class="button button-small button-clear button-balanced icon-right ion-ios-play-outline">Watch</a>-->
          </div>
         
@@ -21,8 +21,8 @@
 
       </div>
       
-      <a href="#/app/vids_menu" class="button button-block button-balanced icon-left ion-ios-arrow-back" ng-if="!isMore">Return to Categories</a>
-      <ion-infinite-scroll ng-if="isMore" on-infinite="loadMore()" spinner="lines">
+      <a href="#/app/vids_menu" class="button button-block button-balanced icon-left ion-ios-arrow-back" ng-if="!vidmore">Return to Categories</a>
+      <ion-infinite-scroll ng-if="vidmore" on-infinite="loadMore()" spinner="crescent">
       </ion-infinite-scroll>
     </div>
   </ion-content>

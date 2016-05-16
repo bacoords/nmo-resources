@@ -388,7 +388,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'ngIOS9U
                }
            })
         .state('app.vids_menu_single', {
-               url: '/vids_menu/:category',
+               url: '/vids_menu/:catId/:catName',
                views: {
                    'menuContent': {
                        templateUrl: 'templates/vids/vids_menu_single.html'

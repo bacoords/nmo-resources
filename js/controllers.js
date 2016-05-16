@@ -194,75 +194,32 @@ angular.module('starter.controllers', [])
     }
 })
 
-.factory('CatFactory', function() {
- //*****************************************************************
-  var vids = [{
-      catid : 1,
-      category : 'Featured Videos'
-    },{
-      catid : 2,
-      category : 'Patient Stories'
-    },{
-      catid : 3,
-      category : 'Foundation Interviews'
-    },{
-      catid : 4,
-      category : 'Questions about NMO'
-    },{
-      catid : 5,
-      category : 'Clinical Trials'
-    },{
-      catid : 6,
-      category : 'Foundation Events'
-    },{
-      catid : 7,
-      category : '2015 NMO Patient Day'
-    },{
-      catid : 8,
-      category : '2013 NMO Patient Day'
-    },{
-      catid : 9,
-      category : '2012 NMO Patient Day'
-    },{
-      catid : 10,
-      category : '2011 NMO Patient Day'
-    },{
-      catid : 11,
-      category : '2010 NMO Patient Day'
-    },{
-      catid : 12,
-      category : 'NMO Roundtables'
-    }
-  ]
-
-  return {
-    all: function() {
-      return vids;
-    },
-    remove: function(faq) {
-      vids.splice(vids.indexOf(faq), 1);
-    },
-    get: function(faqId) {
-      for (var i = 0; i < vids.length; i++) {
-        if (vids[i].catid === parseInt(faqId)) {
-          return vids[i].videos;
+.controller('CatsCtrl', function($scope, $http, $ionicPlatform){
+   
+  $scope.cats = [];
+  $scope.catPage = 1;
+  $scope.isMore = true;
+    
+  $scope.loadCats = function(i){
+  
+    $http.get(i)
+      .success(function(data, status, headers, config){
+        for (var j in data) {
+            $scope.cats.push(data[j]);
         }
-      }
-      return null;
-    },
-    getCat: function(catID){
-        for (var i = 0; i < vids.length; i++) {
-        if (vids[i].catid === parseInt(catID)) {
-          return vids[i].category;
-        }
-      }
-      return null;
-    }
-  };
-})
-
-.controller('CatsCtrl', function($scope, $ionicPlatform, CatFactory){
-    $scope.cats = CatFactory.all();
+         if(data.length == 0 ){
+           $scope.isMore = false;
+           console.log('empty');
+           $scope.$broadcast('scroll.infiniteScrollComplete');
+         }
+          $scope.isLoaded = true;
+          $scope.$broadcast('scroll.infiniteScrollComplete');
+      })
+      .error(function(data, status, headers, config){
+          $scope.isLoaded = false;
+          $scope.isMore = false;
+      });    
+  }
   
    $ionicPlatform.ready(function() {
         if(window.Connection) {
@@ -273,765 +230,74 @@ angular.module('starter.controllers', [])
           } else {
             $scope.isConnected = true;
             if(typeof analytics !== 'undefined') { analytics.trackView("Videos View"); }
+             var urlCat = "https://guthyjacksonfoundation.org/wp-json/wp/v2/videoalbums?page=" + $scope.catPage;
+            $scope.loadCats(urlCat);
           }
       }
    });
-})
 
-.factory('VidFactory', function(){
-  var vids = [{
-        "title": "The NMO Story",
-        "videoId": "jokrVgahoIU",
-        "categories": ["Featured Videos"]
-    },
-    {
-        "title": "2011 NMO Patient Day - Clinical Panel Q & A Part 1",
-        "videoId": "nRqBKZ572ZM",
-        "categories": ["2011 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Simplifying the Science of NMO",
-        "videoId": "mf3wgga_tnU",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "2011 NMO Patient Day - Clinical Panel Q & A Part 2",
-        "videoId": "8oOTT5E8gu4",
-        "categories": ["2011 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2010 NMO Patient Day Opening Speech",
-        "videoId": "xPc0wUQ_djI",
-        "categories": ["2010 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Food for Thought",
-        "videoId": "ZowmAjEwD04",
-        "categories": ["2015 Patient Day"]
-    },
-    {
-        "title": "Managing Stress",
-        "videoId": "BZNcyNSrEi0",
-        "categories": ["2015 Patient Day"]
-    },
-    {
-        "title": "Ask a Doctor - NMO Patient Day 2015",
-        "videoId": "3K7wiRNz4yE",
-        "categories": ["2015 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2010 NMO Patient Day - Mindsight, Mindfulness, and Resilience",
-        "videoId": "nxUgIxiAlJk",
-        "categories": ["2010 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "What are B cells and why are they important in NMO?",
-        "videoId": "Oo9YrqQrXMA",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "2011 NMO Patient Day - Breakout Sessions - Nutrition",
-        "videoId": "EEMyK1XfRIs",
-        "categories": ["2011 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Is there a relationship between vaccinations and NMO?",
-        "videoId": "hIYe96zsUG8",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "2011 NMO Patient Day - Clinical Panel Q & A Part 3",
-        "videoId": "10wW1NrXLKs",
-        "categories": ["2011 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2011 NMO Patient Day - Research Panel Q & A",
-        "videoId": "XJUL_Fvxm6s",
-        "categories": ["2011 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "How is transverse myelitis involved in NMO?",
-        "videoId": "LfRlKGCMIiY",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "2011 NMO Patient Day - Closing Speech & Group Photo",
-        "videoId": "U5DwHAzoNRo",
-        "categories": ["2011 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2010 NMO Patient Day - Q&A Panel Introduction & Discussion Part 1",
-        "videoId": "Z7pXNfxXzhk",
-        "categories": ["2010 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2011 NMO Patient Day - Martha Mann, RN, UTSW",
-        "videoId": "7VpDKrGHzjg",
-        "categories": ["2011 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "How to Make a Difference in Women's Lives",
-        "videoId": "czuTsriR-nE",
-        "categories": ["Patient Stories"]
-    },
-    {
-        "title": "2013 NMO Patient Day: NMOtion Presentation",
-        "videoId": "WUL2vdmEc5c",
-        "categories": ["2013 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2011 NMO Patient Day - Breakout Sessions - Managing Side Effects",
-        "videoId": "xuSkE7Glxpo",
-        "categories": ["2011 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2011 NMO Patient Day - Breakout Sessions - Pediatrics",
-        "videoId": "kk1jAdEit4Y",
-        "categories": ["2011 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2010 NMO Patient Day - Spectrum: A GJCF Online NMO Community",
-        "videoId": "GQ2GxtadcKU",
-        "categories": ["2010 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Why do we need clinical trials in NMO?",
-        "videoId": "p5KxUfz6BIo",
-        "categories": ["Questions about NMO","Clinical Trials"]
-    },
-    {
-        "title": "How does clinical research benefit solving NMO?",
-        "videoId": "-ouaO8WvKPg",
-        "categories": ["Questions about NMO","Clinical Trials"]
-    },
-    {
-        "title": "Ask the Founder - NMO Patient Day 2015",
-        "videoId": "OYUwkvPuVcY",
-        "categories": ["2015 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "What do I need to know if I am thinking about participating in a clinical trial?",
-        "videoId": "LOFQm9WhWOE",
-        "categories": ["Questions about NMO","Clinical Trials"]
-    },
-    {
-        "title": "Clinical Trial Scoreboard - NMO Patient Day 2015",
-        "videoId": "FECmVoN7Gcw",
-        "categories": ["2015 NMO Patient Day","Foundation Events","NMO Patient Days","Cl"]
-    },
-    {
-        "title": "What should a primary care physician know when treating NMO?",
-        "videoId": "btWVUKT6VFc",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "How do I request the NMO IgG Antibody Test?",
-        "videoId": "xXuXJu571oM",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "Advocacy in Action - NMO Patient Day 2015",
-        "videoId": "boICJtS0h1M",
-        "categories": ["2015 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "What are typical NMO symptoms in children?",
-        "videoId": "qjhCIY3sEwA",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "Making NMO History - NMO Patient Day 2015",
-        "videoId": "QuCYnSoTxF8",
-        "categories": ["2015 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "How important is it to participate in a clinical trial?",
-        "videoId": "lO6OdLYCrvo",
-        "categories": ["Questions about NMO","Clinical Trials"]
-    },
-    {
-        "title": "What is the main role for a primary care physician treating NMO?",
-        "videoId": "Gk3BOGe6WVs",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "2010 NMO Patient Day - Q&A Panel Introduction & Discussion Part 2",
-        "videoId": "-kwOFYJVpxM",
-        "categories": ["2010 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Welcome - NMO Patient Day 2015",
-        "videoId": "S9nZ1V0rjGg",
-        "categories": ["2015 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Advancing to Solve NMO - NMO Patient Day 2015",
-        "videoId": "iOMiEkDjyYs",
-        "categories": ["2015 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "NMOtion Gateway to a Cure - NMO Patient Day 2015",
-        "videoId": "RHADuBIqbtI",
-        "categories": ["2015 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2011 NMO Patient Day - Breakout Session - Navigating the Healthcare System",
-        "videoId": "d1WmI-qO6Cg",
-        "categories": ["2011 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "How Patients Will Solve NMO - NMO Patient Day 2015",
-        "videoId": "2MAyF5XXHB8",
-        "categories": ["2015 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Closing Remarks - NMO Patient Day 2015",
-        "videoId": "iUfdsho4ITI",
-        "categories": ["2015 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2012 NMO Patient Day - Closing Remarks",
-        "videoId": "ba5nG8V8BZU",
-        "categories": ["2012 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "What are typical NMO Symptoms?",
-        "videoId": "bsdpAtQf8Kg",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "Everything You Wanted to Know Know but Were Afraid to Ask: Bladder, Bowel & Sexual Dysfunctions",
-        "videoId": "1iiQTWQcssg",
-        "categories": ["2015 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2010 NMO Patient Day - Reaching Out and Coming Together",
-        "videoId": "v8vn0hb8MdI",
-        "categories": ["2010 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "MedImmune : NMO Clinical Trial Update Webinar",
-        "videoId": "OUnbdi0xW_A",
-        "categories": ["Clinical Trials"]
-    },
-    {
-        "title": "2012 NMO Patient Day - Q&A Clinical Panel I (Part 2 of 2)",
-        "videoId": "M9sV_0Ll944",
-        "categories": ["2012 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2013 NMO Patient Day: Victoria Jackson Closing Remarks",
-        "videoId": "QUDAPedDpro",
-        "categories": ["2013 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2013 NMO Patient Day: Breakout Session - Therapeutic Writing",
-        "videoId": "pOqo27nWNZg",
-        "categories": ["2013 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2010 NMO Patient Day - Living With NMO",
-        "videoId": "gSsZXpRkNZI",
-        "categories": ["2010 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "How Do We See in the Dark?",
-        "videoId": "o4hNoih_KEU",
-        "categories": ["Featured Videos"]
-    },
-    {
-        "title": "What Causes NMO?",
-        "videoId": "SewcOjEz0Ss",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "What should patients know if taking immunosuppressive therapy?",
-        "videoId": "fSsWj8QiNs8",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "UCD NMO Patient Day: PM Session",
-        "videoId": "KQEm532YyWg",
-        "categories": ["Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "How common is NMO?",
-        "videoId": "PS9ZiYOdnxk",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "2012 NMO Patient Day - Simplifying the Science of NMO (Breakout Session)",
-        "videoId": "2-LBhjdL8IU",
-        "categories": ["2012 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Alexion Pharmaceuticals : NMO Clinical Trial Update Webinar",
-        "videoId": "ACuTbKDslGo",
-        "categories": ["Clinical Trials"]
-    },
-    {
-        "title": "How Frequent are NMO Relapses?",
-        "videoId": "E_8iasOSEtI",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "2013 NMO Patient Day:Breakout Session - Simplifying the Science of NMO",
-        "videoId": "CY9uOu5cMIg",
-        "categories": ["2013 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2012 NMO Patient Day - Q&A Scientific Research Panel",
-        "videoId": "R85YdZbTIxs",
-        "categories": ["2012 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2012 NMO Patient Day - Q&A Clinical Panel II",
-        "videoId": "BpSdmboApS4",
-        "categories": ["2012 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Kathy Najimy interviews Victoria Jackson",
-        "videoId": "gGzBHctGb3Y",
-        "categories": ["Foundation Interviews"]
-    },
-    {
-        "title": "NMO in the workplace",
-        "videoId": "CBQFQB_VXdc",
-        "categories": ["Patient Stories"]
-    },
-    {
-        "title": "Chugai Pharmaceuticals : NMO Clinical Trial Update Webinar",
-        "videoId": "l7xAu9g9a6I",
-        "categories": ["Clinical Trials"]
-    },
-    {
-        "title": "2012 NMO Patient Day - Managing Stress and Fatigue of NMO (Breakout Session)",
-        "videoId": "X4IkhXSVSQo",
-        "categories": ["2012 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Are We Closer to a Cure?",
-        "videoId": "Vo09WemBY_M",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "Does the weather/environment affect NMO?",
-        "videoId": "iI2Jzb6j1z0",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "2013 NMO Patient Day: NMO Advocacy Actions",
-        "videoId": "UYUQEtVizKU",
-        "categories": ["2013 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Are NMO Patients More Likely to have Other Autoimmune Diseases?",
-        "videoId": "DRziolQ0Wc0",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "2010 - NMO Patient Day - The GJCF Clinical Consortium",
-        "videoId": "tjrRk40Vf0o",
-        "categories": ["2010 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "UCD NMO Patient Day: AM Session",
-        "videoId": "-ezpGxFBqwE",
-        "categories": ["Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Looking Back ...Moving Forward",
-        "videoId": "J6-CHE7Y7ps",
-        "categories": ["Featured Videos"]
-    },
-    {
-        "title": "How Do Clinical Trials Work?",
-        "videoId": "8mi5de3jF14",
-        "categories": ["Featured Videos","Questions about NMO"]
-    },
-    {
-        "title": "2012 NMO Patient Day: Hypnotherapy",
-        "videoId": "LvUMIuoUzNY",
-        "categories": ["2012 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2013 NMO Patient Day: Ask The Doctor - Session 3",
-        "videoId": "cz0Yve3aB3A",
-        "categories": ["2013 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "What are the Most Effective Drug Treatments?",
-        "videoId": "sg1-a7CWmUg",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "Will Embryonic Stem Cell Treatments Help NMO Patients?",
-        "videoId": "nRsmUU7x0rg",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "The Foundation with Kathy Najimy Part 2",
-        "videoId": "nPoJ8CNT7y4",
-        "categories": ["Foundation Interviews"]
-    },
-    {
-        "title": "2012 NMO Patient Day - NMO Advocacy Actions",
-        "videoId": "sg_82O13WP0",
-        "categories": ["2012 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2013 NMO Patient Day: Q&A Clinical Translation Discussion",
-        "videoId": "w583mN_3RGs",
-        "categories": ["2013 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2013 NMO Patient Day: Ask The Doctor - Session 2",
-        "videoId": "jZyU5VfOyqg",
-        "categories": ["2013 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2012 NMO Patient Day - Opening Remarks",
-        "videoId": "NFIDJOk6ITc",
-        "categories": ["2012 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "How are genetics involved in NMO?",
-        "videoId": "twUdF0ZigLQ",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "2012 NMO Patient Day - Patients' Rights (Breakout Session)",
-        "videoId": "T_iMePHY6Qc",
-        "categories": ["2012 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Advancing to Solve NMO",
-        "videoId": "q_TQfFzLwyw",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "Is NMO a form of Multiple Sclerosis (MS)?",
-        "videoId": "ek__omkNgjg",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "2010 NMO Patient Day - Stem Cell Transplants and NMO",
-        "videoId": "Qnveu9pLgv0",
-        "categories": ["2010 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Behind the Scenes: NMO Patient Day",
-        "videoId": "AbUlkE8LVJM",
-        "categories": ["2011 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "On the Road for NMO",
-        "videoId": "Hn83WJxAPJQ",
-        "categories": ["Patient Stories"]
-    },
-    {
-        "title": "How do Clinicians treat NMO?",
-        "videoId": "Qd-EuQ_huiU",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "2012 NMO Patient Day - The GJCF Biorepository for NMO",
-        "videoId": "aU8kgqMzkys",
-        "categories": ["2012 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Currently how is NMO/NMOSD best diagnosed?",
-        "videoId": "cMDCGMytlE8",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "Ali Opening Speech Video",
-        "videoId": "M2yEcWmkhhs",
-        "categories": ["Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "How Broken is my immune system if I have NMO?",
-        "videoId": "N601-kOsKjY",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "Dining for NMO",
-        "videoId": "-XGTpGKnY9w",
-        "categories": ["Foundation Events"]
-    },
-    {
-        "title": "Do NMO treatments have dangerous side effects?",
-        "videoId": "HJGpTSJBo28",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "2013 NMO Patient Day: Breakout Session - Advocacy NMOtion",
-        "videoId": "y7x75UEmtfs",
-        "categories": ["2013 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Does spinal cord damage occur in NMO?",
-        "videoId": "_qSEUPgcmIY",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "2010 NMO Patient Day - The Guthy-Jackson Charitable Foundation Repository for NMO",
-        "videoId": "HrCWzLaNQng",
-        "categories": ["2010 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "What are T cells and why are they important to NMO?",
-        "videoId": "OlzdxYf2gs0",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "What is Optic Neuritis?",
-        "videoId": "4Nw464s6-I4",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "Living with NMO: Candace Coffee",
-        "videoId": "QtU8I02OxSg",
-        "categories": ["Patient Stories"]
-    },
-    {
-        "title": "Christine Ha Inspirational Speech at 2013 NMO Patient Day",
-        "videoId": "DgC_JiqE4K4",
-        "categories": ["2013 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "A Path to Progress",
-        "videoId": "5OyyTkTUgeQ",
-        "categories": ["Featured Videos"]
-    },
-    {
-        "title": "From Mascara to Medicine: A Mom on a Mission",
-        "videoId": "BgSE193plr8",
-        "categories": ["Featured Videos"]
-    },
-    {
-        "title": "What is Neurogenic Pain?",
-        "videoId": "sizMWdrlEHQ",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "How does NMO Differ from MS? The Discovery of NMO IgG",
-        "videoId": "rt-dMF3QkQw",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "Creating a New Dialogue About NMO",
-        "videoId": "Rfh08092hZc",
-        "categories": ["Featured Videos"]
-    },
-    {
-        "title": "NMO Tolerization",
-        "videoId": "6afvRawxTzc",
-        "categories": ["Featured Videos"]
-    },
-    {
-        "title": "Victoria Jackson and Ali Guthy on Ellen",
-        "videoId": "ZQCDzLWBdvM",
-        "categories": ["Featured Videos"]
-    },
-    {
-        "title": "Insurance and Rare Diseases",
-        "videoId": "SOmQfN-0PY4",
-        "categories": ["none"]
-    },
-    {
-        "title": "Living with NMO",
-        "videoId": "gTlejHmYqsU",
-        "categories": ["Featured Videos"]
-    },
-    {
-        "title": "2012 NMO Patient Day - Meditation and Yoga (Breakout Session)",
-        "videoId": "4RVgJoF_Cv4",
-        "categories": ["2012 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Living with NMO: Collin McDaniel's Story",
-        "videoId": "gUh1oCix3tc",
-        "categories": ["Patient Stories"]
-    },
-    {
-        "title": "What is the Difference Between Monophasic and Relapsing NMO?",
-        "videoId": "UP1lXFZC-0E",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "Ali's Story with Kathy Najimy Part 1",
-        "videoId": "-OisV05yRSo",
-        "categories": ["Foundation Interviews"]
-    },
-    {
-        "title": "2013 NMO Patient Day: Ask The Doctor - Session 1",
-        "videoId": "EajRrSb_ruY",
-        "categories": ["2013 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2011 NMO Patient Day: Ali Guthy and Victoria Jackson Introduction",
-        "videoId": "p22OAaPH0wE",
-        "categories": ["2011 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "NMOtion Be the Cure",
-        "videoId": "JbpW635uoxY",
-        "categories": ["Featured Videos"]
-    },
-    {
-        "title": "Patient Day Welcome: Ali Guthy & Ms. Victoria Jackson",
-        "videoId": "by-KGezTdSE",
-        "categories": ["2013 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Pioneering a New Scientific Research Model",
-        "videoId": "2uwA1CTEp4M",
-        "categories": ["Featured Videos"]
-    },
-    {
-        "title": "Why is it Important to Distinguish NMO from MS?",
-        "videoId": "2EZvpyqPcy8",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "The Guthy-Jackson Charitable Foundation 2009 NMO Patient Day",
-        "videoId": "Y4sjkeC1vcA",
-        "categories": ["2009 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Power of a Mother's Love",
-        "videoId": "YvHDhuc_ZGg",
-        "categories": ["Foundation Interviews"]
-    },
-    {
-        "title": "2011 NMO Patient Day - Breakout Sessions - Recognizing & Treating Attacks",
-        "videoId": "XYhdNZpv2Qs",
-        "categories": ["2011 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Ali Guthy and Victoria Jackson on Marie",
-        "videoId": "UJLEfMxqKDc",
-        "categories": ["Foundation Interviews"]
-    },
-    {
-        "title": "NMO Patient Day: Q&A Clinical Studies Discussion Finding a Therapeutic for NMO",
-        "videoId": "NJ3XT6QQy-o",
-        "categories": ["Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Why do Patients Recover Differently from Attacks?",
-        "videoId": "ZW6yWZqNWcY",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "Ali Guthy and The Guthy-Jackson Charitable Foundation",
-        "videoId": "DI2GI9GFY5o",
-        "categories": ["Featured Videos"]
-    },
-    {
-        "title": "The Guthy-Jackson Charitable Foundation 2009 NMO Roundtable Conference",
-        "videoId": "2NsHh-wqSOM",
-        "categories": ["2009 NMO Roundtable","Foundation Events","NMO Roundtables"]
-    },
-    {
-        "title": "2012 NMO Patient Day - Nutrition and Diet (Breakout Session)",
-        "videoId": "dFbv5-CiAcA",
-        "categories": ["2012 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "2012 NMO Patient Day - Q&A Clinical Panel I (Part 1 of 2)",
-        "videoId": "wCobj3k1s44",
-        "categories": ["2012 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Hope with Kathy Najimy Part 3",
-        "videoId": "NB_5sIseRzE",
-        "categories": ["Foundation Interviews"]
-    },
-    {
-        "title": "How is the NMO IgG Antibody detected?",
-        "videoId": "d3y8yj-fs1U",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "Can Tissues injured by NMO be repaired (Regeneration/Remyelination)?",
-        "videoId": "UeR6YwY_cRs",
-        "categories": ["Questions about NMO"]
-    },
-    {
-        "title": "2010 NMO Patient Day - Closing Comments",
-        "videoId": "Ace3_jx9RbM",
-        "categories": ["2010 NMO Patient Day","Foundation Events","NMO Patient Days"]
-    },
-    {
-        "title": "Should I continue to get vaccinations if I'm on immunosuppressive therapy?",
-        "videoId": "0AqLwjVK2yM",
-        "categories": ["Questions about NMO"]
-    }]
-  
-  return {
-    all: function(){
-      return vids;
-    },
-    byCat: function(category, start, end){
-      var vidsbycat = [];
-      var k = start;
-      var l = 0;
-      for (var i = 0; i < vids.length; i++){
-        for (var j = 0; j < vids[i].categories.length; j++){
-          if(vids[i].categories[j] === category){
-            l++;
-            if(l >= k){
-              vidsbycat.push(vids[i]);
-              k++;
-            }
-          }
-        }
-        if(k === end){
-          return {videos: vidsbycat, more : true};
-          
-        }
-      }
-      return {videos: vidsbycat, more : false};
-    }
+  $scope.loadMore = function(){
+    $scope.catPage += 1;
+    var urlCat = "https://guthyjacksonfoundation.org/wp-json/wp/v2/videoalbums?page=" + $scope.catPage;
+    $scope.loadCats(urlCat);
+
   }
+  
 })
 
-.controller('VidCtrl', function($scope, $sce, $stateParams, $ionicModal, VidFactory, CatFactory){
+.controller('VidCtrl', function($scope, $http, $sce, $stateParams, $ionicModal, $ionicPlatform){
     
-  $scope.category = CatFactory.getCat($stateParams.category);
-  var getvidsbycat =  VidFactory.byCat($scope.category, 0, 4);
-  $scope.vidlist = getvidsbycat.videos;
-  $scope.vidmore = getvidsbycat.more;
+     
+  $scope.vids = [];
+  $scope.vidPage = 1;
+  $scope.isMore = true;
   
+  $scope.category = $stateParams.catId;
+  $scope.pageTitle= $stateParams.catName;
   
+  $scope.baseUrl = "https://guthyjacksonfoundation.org/wp-json/wp/v2/videos?videoalbums=" + $scope.category + "&page=";
+  $scope.loadVids = function(i){
   
-  for (var i = 0; i < $scope.vidlist.length; i++)
-  {
-    $scope.vidlist[i].videourl = $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + $scope.vidlist[i].videoId + '?showinfo=0&amp;rel=0');
-    $scope.vidlist[i].thumburl = $sce.trustAsResourceUrl('http://img.youtube.com/vi/' +  $scope.vidlist[i].videoId + '/mqdefault.jpg');
+    $http.get(i)
+      .success(function(data, status, headers, config){
+        for (var j in data) {
+            $scope.vids.push(data[j]);
+        }
+         if(data.length == 0 ){
+           $scope.isMore = false;
+           console.log('empty');
+           $scope.$broadcast('scroll.infiniteScrollComplete');
+         }
+          $scope.isLoaded = true;
+          $scope.$broadcast('scroll.infiniteScrollComplete');
+      })
+      .error(function(data, status, headers, config){
+          $scope.isLoaded = false;
+          $scope.isMore = false;
+      });    
   }
+  
+  
+   $ionicPlatform.ready(function() {
+        if(window.Connection) {
+          if(navigator.connection.type == Connection.NONE) {
 
+            $scope.isConnected = false;
+
+          } else {
+            $scope.isConnected = true;
+            if(typeof analytics !== 'undefined') { analytics.trackView("Video Category View: "); }
+             var urlVid = $scope.baseUrl + $scope.vidPage;
+            $scope.loadVids(urlVid);
+          }
+      }
+   });
   
   $scope.loadMore = function(){
-    var lastlength = $scope.vidlist.length
-    var start = lastlength + 1;
-    var end = start + 4;
-    var newvidscon = VidFactory.byCat($scope.category, start, end);
-    var newvids = newvidscon.videos;
-    $scope.vidmore = newvidscon.more;
-    for (var i = 0; i  < newvids.length; i++){
-      $scope.vidlist.push(newvids[i]);
-    }
-    for (var i = lastlength; i < $scope.vidlist.length; i++)
-    {
-      $scope.vidlist[i].videourl = $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + $scope.vidlist[i].videoId + '?showinfo=0&amp;rel=0'); 
-      $scope.vidlist[i].thumburl = $sce.trustAsResourceUrl('http://img.youtube.com/vi/' +  $scope.vidlist[i].videoId + '/mqdefault.jpg');
-    }
-    $scope.$broadcast('scroll.infiniteScrollComplete');
+    $scope.vidPage += 1;
+    var urlVid = $scope.baseUrl + $scope.vidPage;
+    $scope.loadVids(urlVid);
   }
-  
   
   $ionicModal.fromTemplateUrl('templates/vids/vids_menu_modal.html', {
     scope: $scope,
@@ -1040,7 +306,8 @@ angular.module('starter.controllers', [])
     $scope.modal = modal;
   });
   $scope.openModal = function(videourl, title) {
-    $scope.modal.videourl = videourl;
+    $scope.modal.videourl = $sce.trustAsResourceUrl(videourl);
+    
     $scope.modal.title = title;
     $scope.modal.show();
      if(typeof analytics !== 'undefined') { analytics.trackView("Video Open: "); }
@@ -1068,6 +335,77 @@ angular.module('starter.controllers', [])
     // Execute action
   });
 })
+
+//.controller('VidCtrl', function($scope, $sce, $stateParams, $ionicModal, VidFactory, CatFactory){
+//    
+//  $scope.category = CatFactory.getCat($stateParams.category);
+//  var getvidsbycat =  VidFactory.byCat($scope.category, 0, 4);
+//  $scope.vidlist = getvidsbycat.videos;
+//  $scope.vidmore = getvidsbycat.more;
+//  
+//  
+//  
+//  for (var i = 0; i < $scope.vidlist.length; i++)
+//  {
+//    $scope.vidlist[i].videourl = $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + $scope.vidlist[i].videoId + '?showinfo=0&amp;rel=0');
+//    $scope.vidlist[i].thumburl = $sce.trustAsResourceUrl('http://img.youtube.com/vi/' +  $scope.vidlist[i].videoId + '/mqdefault.jpg');
+//  }
+//
+//  
+//  $scope.loadMore = function(){
+//    var lastlength = $scope.vidlist.length
+//    var start = lastlength + 1;
+//    var end = start + 4;
+//    var newvidscon = VidFactory.byCat($scope.category, start, end);
+//    var newvids = newvidscon.videos;
+//    $scope.vidmore = newvidscon.more;
+//    for (var i = 0; i  < newvids.length; i++){
+//      $scope.vidlist.push(newvids[i]);
+//    }
+//    for (var i = lastlength; i < $scope.vidlist.length; i++)
+//    {
+//      $scope.vidlist[i].videourl = $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + $scope.vidlist[i].videoId + '?showinfo=0&amp;rel=0'); 
+//      $scope.vidlist[i].thumburl = $sce.trustAsResourceUrl('http://img.youtube.com/vi/' +  $scope.vidlist[i].videoId + '/mqdefault.jpg');
+//    }
+//    $scope.$broadcast('scroll.infiniteScrollComplete');
+//  }
+//  
+//  
+//  $ionicModal.fromTemplateUrl('templates/vids/vids_menu_modal.html', {
+//    scope: $scope,
+//    animation: 'slide-in-up'
+//  }).then(function(modal) {
+//    $scope.modal = modal;
+//  });
+//  $scope.openModal = function(videourl, title) {
+//    $scope.modal.videourl = videourl;
+//    $scope.modal.title = title;
+//    $scope.modal.show();
+//     if(typeof analytics !== 'undefined') { analytics.trackView("Video Open: "); }
+//  };
+//  $scope.closeModal = function() {
+//    $scope.modal.hide();
+//    $scope.modal.remove();
+//    $ionicModal.fromTemplateUrl('templates/vids/vids_menu_modal.html', {
+//      scope: $scope,
+//      animation: 'slide-in-up'
+//    }).then(function(modal) {
+//      $scope.modal = modal;
+//    });
+//  };
+//  //Cleanup the modal when we're done with it!
+//  $scope.$on('$destroy', function() {
+//    $scope.modal.remove();
+//  });
+//  // Execute action on hide modal
+//  $scope.$on('modal.hidden', function() {
+//    // Execute action
+//  });
+//  // Execute action on remove modal
+//  $scope.$on('modal.removed', function() {
+//    // Execute action
+//  });
+//})
 
 .controller('DocCountriesCtrl', function($scope, $ionicPlatform, $http){
    $ionicPlatform.ready(function() {

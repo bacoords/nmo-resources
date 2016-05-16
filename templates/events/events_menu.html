@@ -4,7 +4,7 @@
         <ion-list>
   
             <ion-item ng-repeat="item in items" ng-if="isLoaded" class="item-text-wrap">
-              <h3>{{item.title.rendered}}</h3>  
+              <h3 ng-bind-html="item.title.rendered"></h3>  
               <p><strong>Location: </strong> {{item._gjcf_events_venue_name}}</p>  
               <p><strong>Date: </strong> {{parseDate(item._gjcf_events_date)}}</p>
               <br> 
