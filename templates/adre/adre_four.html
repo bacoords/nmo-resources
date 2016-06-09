@@ -4,18 +4,28 @@
         <h1 class="sunleaf sunleaf__adre parallax-sub">Facebook Groups</h1>
       
        <ion-list>
-          <ion-item class="item-text-wrap" ng-repeat="group in groups">
-            <h3>{{group.gsx$name.$t}}</h3>
-            <p><strong>Language:</strong>{{group.gsx$language.$t}}</p>
-            <p><strong>Group Status:</strong> {{group.gsx$groupstatus.$t}}</p>
-             <a class="button button-block button-outline  button-positive icon-left ion-social-facebook-outline" href="#"  ng-click="openFBLink(group)">Visit Group</a>
+          <ion-item class="item-thumbnail-left item-text-wrap" ng-repeat="group in groups">
+            <img ng-if="group.better_featured_image" ng-src="{{group.better_featured_image.media_details.sizes.thumbnail.source_url}}" alt="Group Thumbnail">
+            
+             <img ng-if="!group.better_featured_image" src="https://s3.amazonaws.com/gjcf-wp-uploads/wp-content/uploads/2016/05/23213835/icon-filler-150x150.jpg" alt="Group Thumbnail">
+            <h4 ng-bind-html="group.title.rendered"></h4>
+            <p><strong>Language:</strong>{{group._gjcf_fb_groups_language}}</p>
+            <p><strong>Group Status:</strong> {{group._gjcf_fb_groups_groupstatus}}</p>
+             <a class="button button-block button-outline  button-positive icon-left ion-social-facebook-outline" href="#"  ng-click="openLink(group)">Visit Group</a>
           </ion-item>
         
       
         </ion-list>
-        <div class="padding white-background text-center">
-          <ion-spinner ng-if="!isLoaded" icon="lines" class="center spinner-balanced"></ion-spinner>
-        </div>
+        
+                  <ion-infinite-scroll
+                 ng-if="isMore"
+                on-infinite="loadMore()"
+                distance="1%"
+                spinner="lines"
+                class="infinite-spinner-balanced">
+              </ion-infinite-scroll>
+            
+ 
               <div class="card" ng-if="!isConnected">
              <div class="item item-text-wrap">
                 <h2 class="assertive">No Network Connection</h2>

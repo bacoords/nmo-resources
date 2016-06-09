@@ -195,7 +195,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('CatsCtrl', function($scope, $http, $ionicPlatform){
-   
+
   $scope.cats = [];
   $scope.catPage = 1;
   $scope.isMore = true;
@@ -229,7 +229,7 @@ angular.module('starter.controllers', [])
 
           } else {
             $scope.isConnected = true;
-            if(typeof analytics !== 'undefined') { analytics.trackView("Videos View"); }
+            if(typeof analytics !== 'undefined') { analytics.trackView("Support groups View"); }
              var urlCat = "https://guthyjacksonfoundation.org/wp-json/wp/v2/videoalbums?page=" + $scope.catPage;
             $scope.loadCats(urlCat);
           }
@@ -247,7 +247,7 @@ angular.module('starter.controllers', [])
 
 .controller('VidCtrl', function($scope, $http, $sce, $stateParams, $ionicModal, $ionicPlatform){
     
-     
+  
   $scope.vids = [];
   $scope.vidPage = 1;
   $scope.isMore = true;
@@ -335,77 +335,6 @@ angular.module('starter.controllers', [])
     // Execute action
   });
 })
-
-//.controller('VidCtrl', function($scope, $sce, $stateParams, $ionicModal, VidFactory, CatFactory){
-//    
-//  $scope.category = CatFactory.getCat($stateParams.category);
-//  var getvidsbycat =  VidFactory.byCat($scope.category, 0, 4);
-//  $scope.vidlist = getvidsbycat.videos;
-//  $scope.vidmore = getvidsbycat.more;
-//  
-//  
-//  
-//  for (var i = 0; i < $scope.vidlist.length; i++)
-//  {
-//    $scope.vidlist[i].videourl = $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + $scope.vidlist[i].videoId + '?showinfo=0&amp;rel=0');
-//    $scope.vidlist[i].thumburl = $sce.trustAsResourceUrl('http://img.youtube.com/vi/' +  $scope.vidlist[i].videoId + '/mqdefault.jpg');
-//  }
-//
-//  
-//  $scope.loadMore = function(){
-//    var lastlength = $scope.vidlist.length
-//    var start = lastlength + 1;
-//    var end = start + 4;
-//    var newvidscon = VidFactory.byCat($scope.category, start, end);
-//    var newvids = newvidscon.videos;
-//    $scope.vidmore = newvidscon.more;
-//    for (var i = 0; i  < newvids.length; i++){
-//      $scope.vidlist.push(newvids[i]);
-//    }
-//    for (var i = lastlength; i < $scope.vidlist.length; i++)
-//    {
-//      $scope.vidlist[i].videourl = $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + $scope.vidlist[i].videoId + '?showinfo=0&amp;rel=0'); 
-//      $scope.vidlist[i].thumburl = $sce.trustAsResourceUrl('http://img.youtube.com/vi/' +  $scope.vidlist[i].videoId + '/mqdefault.jpg');
-//    }
-//    $scope.$broadcast('scroll.infiniteScrollComplete');
-//  }
-//  
-//  
-//  $ionicModal.fromTemplateUrl('templates/vids/vids_menu_modal.html', {
-//    scope: $scope,
-//    animation: 'slide-in-up'
-//  }).then(function(modal) {
-//    $scope.modal = modal;
-//  });
-//  $scope.openModal = function(videourl, title) {
-//    $scope.modal.videourl = videourl;
-//    $scope.modal.title = title;
-//    $scope.modal.show();
-//     if(typeof analytics !== 'undefined') { analytics.trackView("Video Open: "); }
-//  };
-//  $scope.closeModal = function() {
-//    $scope.modal.hide();
-//    $scope.modal.remove();
-//    $ionicModal.fromTemplateUrl('templates/vids/vids_menu_modal.html', {
-//      scope: $scope,
-//      animation: 'slide-in-up'
-//    }).then(function(modal) {
-//      $scope.modal = modal;
-//    });
-//  };
-//  //Cleanup the modal when we're done with it!
-//  $scope.$on('$destroy', function() {
-//    $scope.modal.remove();
-//  });
-//  // Execute action on hide modal
-//  $scope.$on('modal.hidden', function() {
-//    // Execute action
-//  });
-//  // Execute action on remove modal
-//  $scope.$on('modal.removed', function() {
-//    // Execute action
-//  });
-//})
 
 .controller('DocCountriesCtrl', function($scope, $ionicPlatform, $http){
    $ionicPlatform.ready(function() {
@@ -1309,61 +1238,181 @@ $ionicHistory.clearHistory();
 })
 
 .controller('AdreThreeCtrl', function($scope, $http, $ionicLoading,  $ionicPlatform){
-    $ionicPlatform.ready(function() {
+
+  
+  
+     $scope.stripLinks = function(txt) {
+    return txt.replace(/<a\b[^>]*>/i,"").replace(/<\/a>/i, "");
+ }
+     
+  $scope.groups = [];
+  $scope.groupPage = 1;
+  $scope.isMore = true;
+    
+  $scope.loadGroups = function(i){
+  
+    $http.get(i)
+      .success(function(data, status, headers, config){
+        for (var j in data) {
+            $scope.groups.push(data[j]);
+        }
+         if(data.length == 0 ){
+           $scope.isMore = false;
+           console.log('empty');
+           $scope.$broadcast('scroll.infiniteScrollComplete');
+         }
+          $scope.isLoaded = true;
+          $scope.$broadcast('scroll.infiniteScrollComplete');
+      })
+      .error(function(data, status, headers, config){
+          $scope.isLoaded = false;
+          $scope.isMore = false;
+      });    
+  }
+  
+   $ionicPlatform.ready(function() {
         if(window.Connection) {
           if(navigator.connection.type == Connection.NONE) {
-            $scope.isLoaded = true;
+
             $scope.isConnected = false;
 
           } else {
             $scope.isConnected = true;
-            if(typeof analytics !== 'undefined') { analytics.trackView("Latest Research View"); }
+            if(typeof analytics !== 'undefined') { analytics.trackView("Support Groups View"); }
+             var urlGroup = "https://guthyjacksonfoundation.org/wp-json/wp/v2/support-groups?supportgroupstypes=1979&filter[order]=ASC&filter[orderby]=title&page=" + $scope.groupPage;
+            $scope.loadGroups(urlGroup);
           }
       }
    });
-   if(typeof analytics !== 'undefined') { analytics.trackView("Support Groups View"); }
-    var url = "https://spreadsheets.google.com/feeds/list/1L57f3HKBM1tAz7-pa1idxi_IGgG5v0qDF91AFnCGpMY/od6/public/values?alt=json";
 
-  $http.get(url)
-    .success(function(data, status, headers, config){
-       $scope.groups = data.feed.entry;
-       $scope.isLoaded = true;
-    })
-    .error(function(data, status, headers, config){
-      $scope.isLoaded = false;
-    });
-})
+  $scope.loadMore = function(){
+    $scope.groupPage += 1;
+    var urlGroup = "https://guthyjacksonfoundation.org/wp-json/wp/v2/support-groups?supportgroupstypes=1979&filter[order]=ASC&filter[orderby]=title&page=" + $scope.groupPage;
+    $scope.loadGroups(urlGroup);
 
-.controller('AdreFourCtrl', function($scope, $http,  $ionicPlatform){
-    $ionicPlatform.ready(function() {
-        if(window.Connection) {
-          if(navigator.connection.type == Connection.NONE) {
-            $scope.isLoaded = true;
-            $scope.isConnected = false;
-
-          } else {
-            $scope.isConnected = true;
-					 if(typeof analytics !== 'undefined') { analytics.trackView("FB Groups View"); }
-          }
-      }
-   });
-    var url = "https://spreadsheets.google.com/feeds/list/11tzCq3BUT_wPDzRML8yaEjCxh8ppSu0ZFQRKvxLdKQs/od6/public/values?alt=json";
-
-  $http.get(url)
-    .success(function(data, status, headers, config){
-       $scope.groups = data.feed.entry;
-        $scope.isLoaded = true;
-    })
-    .error(function(data, status, headers, config){
-        $scope.isLoaded = false;
-    });
-  $scope.openFBLink = function(group){
-    var link = group.gsx$url.$t;
+  }
+  $scope.openLink = function(item){
+    var link = item.link;
     window.open(link, '_system', ''); return false;
   }
 })
 
-.controller('EventsMenuCtrl', function($scope, $http,  $ionicPlatform){
+.controller('AdreFourCtrl', function($scope, $http,  $ionicPlatform){
+      $scope.stripLinks = function(txt) {
+    return txt.replace(/<a\b[^>]*>/i,"").replace(/<\/a>/i, "");
+ }  
+  $scope.groups = [];
+  $scope.groupPage = 1;
+  $scope.isMore = true;
+    
+  $scope.loadGroups = function(i){
+  
+    $http.get(i)
+      .success(function(data, status, headers, config){
+        for (var j in data) {
+            $scope.groups.push(data[j]);
+        }
+         if(data.length == 0 ){
+           $scope.isMore = false;
+           console.log('empty');
+           $scope.$broadcast('scroll.infiniteScrollComplete');
+         }
+          $scope.isLoaded = true;
+          $scope.$broadcast('scroll.infiniteScrollComplete');
+      })
+      .error(function(data, status, headers, config){
+          $scope.isLoaded = false;
+          $scope.isMore = false;
+      });    
+  }
+  
+   $ionicPlatform.ready(function() {
+        if(window.Connection) {
+          if(navigator.connection.type == Connection.NONE) {
+
+            $scope.isConnected = false;
+
+          } else {
+            $scope.isConnected = true;
+            if(typeof analytics !== 'undefined') { analytics.trackView("FB Groups View"); }
+             var urlGroup = "https://guthyjacksonfoundation.org/wp-json/wp/v2/support-groups?supportgroupstypes=1980&filter[order]=ASC&filter[orderby]=title&page=" + $scope.groupPage;
+            $scope.loadGroups(urlGroup);
+          }
+      }
+   });
+
+  $scope.loadMore = function(){
+    $scope.groupPage += 1;
+    var urlGroup = "https://guthyjacksonfoundation.org/wp-json/wp/v2/support-groups?supportgroupstypes=1980&filter[order]=ASC&filter[orderby]=title&page=" + $scope.groupPage;
+    $scope.loadGroups(urlGroup);
+
+  }
+  
+  $scope.openLink = function(item){
+    var link = item._gjcf_fb_groups_url;
+    window.open(link, '_system', ''); return false;
+  }
+})
+
+
+.controller('AdreFiveCtrl', function($scope, $http,  $ionicPlatform){
+     $scope.stripLinks = function(txt) {
+    return txt.replace(/<a\b[^>]*>/i,"").replace(/<\/a>/i, "");
+ }
+  $scope.groups = [];
+  $scope.groupPage = 1;
+  $scope.isMore = true;
+    
+  $scope.loadGroups = function(i){
+  
+    $http.get(i)
+      .success(function(data, status, headers, config){
+        for (var j in data) {
+            $scope.groups.push(data[j]);
+        }
+         if(data.length == 0 ){
+           $scope.isMore = false;
+           console.log('empty');
+           $scope.$broadcast('scroll.infiniteScrollComplete');
+         }
+          $scope.isLoaded = true;
+          $scope.$broadcast('scroll.infiniteScrollComplete');
+      })
+      .error(function(data, status, headers, config){
+          $scope.isLoaded = false;
+          $scope.isMore = false;
+      });    
+  }
+  
+   $ionicPlatform.ready(function() {
+        if(window.Connection) {
+          if(navigator.connection.type == Connection.NONE) {
+
+            $scope.isConnected = false;
+
+          } else {
+            $scope.isConnected = true;
+            if(typeof analytics !== 'undefined') { analytics.trackView("Telecon Groups View"); }
+             var urlGroup = "https://guthyjacksonfoundation.org/wp-json/wp/v2/support-groups?supportgroupstypes=1981&filter[order]=ASC&filter[orderby]=title&page=" + $scope.groupPage;
+            $scope.loadGroups(urlGroup);
+          }
+      }
+   });
+
+  $scope.loadMore = function(){
+    $scope.groupPage += 1;
+    var urlGroup = "https://guthyjacksonfoundation.org/wp-json/wp/v2/support-groups?supportgroupstypes=1981&filter[order]=ASC&filter[orderby]=title&page=" + $scope.groupPage;
+    $scope.loadGroups(urlGroup);
+
+  }
+  $scope.openLink = function(item){
+    var link = item.link;
+    window.open(link, '_system', ''); return false;
+  }
+ 
+})
+
+.controller('EventsMenuCtrl', function($scope, $http,  $ionicPlatform, $ionicModal){
     $ionicPlatform.ready(function() {
         if(window.Connection) {
           if(navigator.connection.type == Connection.NONE) {
@@ -1391,10 +1440,53 @@ $ionicHistory.clearHistory();
     window.open(link, '_system', ''); return false;
   }
   
+  $scope.mapsLink = function(lat, long){
+    var href = 'http://maps.google.com/maps?q=loc:' + lat + '+' + long;
+    window.open(href, '_system', ''); return false;
+  }
+  
   $scope.parseDate = function(date){
-    var date = moment.unix(date);
+    var date = moment.unix(date).utc();
     return date.format("dddd, MMMM Do YYYY");
   }
+   $scope.stripLinks = function(txt) {
+    return txt.replace(/<a\b[^>]*>/i,"").replace(/<\/a>/i, "");
+ }
+  
+  $ionicModal.fromTemplateUrl('templates/events/events_menu_modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  $scope.openModal = function(event) {
+    
+    $scope.modal.event = event;
+    $scope.modal.show();
+     if(typeof analytics !== 'undefined') { analytics.trackView("Event Open: "); }
+  };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+    $scope.modal.remove();
+    $ionicModal.fromTemplateUrl('templates/events/events_menu_modal.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+  };
+  //Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modal.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  });
   
 })
 

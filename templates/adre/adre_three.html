@@ -4,26 +4,43 @@
         <h1 class="sunleaf sunleaf__adre parallax-sub">Support Groups</h1>
         <div class="white-background">
         <div class="padding">
+<!--
           <p>Interested in joining a group? Contact Guthy-Jackson:</p>
            <a class="button button-block button-outline button-balanced icon-left ion-ios-telephone-outline"   href="#" onclick="window.open('tel:+18586387638', '_system', ''); return false;">858.638.7638 (Office)</a> <a class="button button-block button-outline button-balanced icon-left ion-ios-email-outline"  href="#" onclick="window.open('mailto:info@guthyjacksonfoundation.org?subject=Support Groups', '_system', ''); return false;">info@guthyjacksonfoundation.org</a>
+-->
         </div>
        <ion-list>
-          <ion-item class="item-text-wrap" ng-repeat="group in groups">
-            <h3>{{group.gsx$name.$t}}</h3>
-            <p ng-show="group.gsx$location.$t">{{group.gsx$location.$t}}</p>
-            <p ng-hide="group.gsx$location.$t">Location TBD</p>
-            <p ng-show="group.gsx$address.$t">{{group.gsx$address.$t}}</p>
-            <p ng-show="group.gsx$address.$t">{{group.gsx$city.$t}}, {{group.gsx$state.$t}} {{group.gsx$zip.$t}}</p>
+          <ion-item class="item-thumbnail-left item-text-wrap" ng-repeat="group in groups">
+             
+            
+             
+             <img ng-if="group.better_featured_image" ng-src="{{group.better_featured_image.media_details.sizes.thumbnail.source_url}}" alt="Group Thumbnail">
+             <img ng-if="!group.better_featured_image" src="https://s3.amazonaws.com/gjcf-wp-uploads/wp-content/uploads/2016/05/23213835/icon-filler-150x150.jpg" alt="Group Thumbnail">
+            <h3 ng-bind-html="group.title.rendered"></h3>
+            <p ng-show="group._gjcf_support_groups_location">{{group._gjcf_support_groups_location}}</p>
+            <p ng-hide="group._gjcf_support_groups_location">Location TBD</p>
+            <p ng-show="group._gjcf_support_groups_address">{{group._gjcf_support_groups_address}}</p>
+            <p ng-show="group._gjcf_support_groups_address">{{group._gjcf_support_groups_city}}, {{group._gjcf_support_groups_state}} {{group._gjcf_support_groups_zip}}</p>
+<!--
             <p ng-show="group.gsx$nextmeetingdate.$t"><strong>Next Meeting Date: {{group.gsx$nextmeetingdate.$t}}</strong></p>
             <p ng-show="group.gsx$nextmeetingtime.$t"><strong>Next Meeting Time: {{group.gsx$nextmeetingtime.$t}}</strong></p>
             <p ng-hide="group.gsx$nextmeetingdate.$t"><strong>Next Meeting TBD</strong></p>
+-->
+           <a class="button button-block button-outline  button-balanced" href="#"  ng-click="openLink(group)">Learn More</a>
           </ion-item>
         
       
         </ion-list>
-        <div class="padding white-background text-center">
-          <ion-spinner ng-if="!isLoaded" icon="lines" class="center spinner-balanced"></ion-spinner>
-        </div>
+        
+                  <ion-infinite-scroll
+                 ng-if="isMore"
+                on-infinite="loadMore()"
+                distance="1%"
+                spinner="lines"
+                class="infinite-spinner-balanced">
+              </ion-infinite-scroll>
+            
+  
              <div class="card" ng-if="!isConnected">
              <div class="item item-text-wrap">
                 <h2 class="assertive">No Network Connection</h2>

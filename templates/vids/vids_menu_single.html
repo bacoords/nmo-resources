@@ -22,7 +22,8 @@
       </div>
       
       <a href="#/app/vids_menu" class="button button-block button-balanced icon-left ion-ios-arrow-back" ng-if="!isMore">Return to Categories</a>
-      <ion-infinite-scroll ng-if="isMore" on-infinite="loadMore()" spinner="lines">
+      <ion-infinite-scroll ng-if="isMore" on-infinite="loadMore()" spinner="lines"
+                class="infinite-spinner-balanced">
       </ion-infinite-scroll>
     </div>
   </ion-content>

@@ -1,2 +1,11 @@
-﻿body {
+body {
+}
+.infinite-spinner-balanced .spinner {
+  stroke:#74b332;
+  fill:#74b332;
+}
+
+img.center{
+  margin: 0 auto;
+  display: block;
 }

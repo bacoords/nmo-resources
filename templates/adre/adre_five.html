@@ -1,49 +1,35 @@
-<ion-view view-title="Advocate Resources">
+<ion-view view-title="Advocate Resources" ng-controller="AdreFiveCtrl">
     <ion-content header-parallaxsub scroll-event-interval="5">
         
-        <h1 class="sunleaf sunleaf__adre parallax-sub">Parental Telecon</h1>
-        <div class="padding white-background">
-
-          <h3>Attention Parents with Children (18 years old or younger) Who Have NMO</h3>
-          <p>Feeling a little overwhelmed?</p>
-          <p>Wonder how other parents cope?</p>
-          <p>YOU ARE NOT ALONE!</p>
-          <p><strong>Our NMO Parental Support Teleconferences are for you:</strong></p>
-          <ul>
-            <li>
-              &#8226; Parent-to-Parent Support
-            </li>
-            <li>
-               &#8226; Different Topics Each Call
-            </li>
-            <li>
-               &#8226; Guest Speakers
-            </li>
-            <li>
-               &#8226; Community of Caring
-            </li>
-            <li>
-               &#8226; For Parents with Teenage Children or younger
-            </li>
-          </ul>
-          <br><br>
-          
-           <div class="card">
-            <div class="item item-text-wrap">
-             <p><strong>Dates:</strong> Every month: 1<sup>st</sup> and 3<sup>rd</sup> Tuesdays</p>
-          
-              <p><strong>Time: </strong>7 p.m. Central Time</p>
+        <h1 class="sunleaf sunleaf__adre parallax-sub">Support Group Telecons</h1>
+      
+       <ion-list>
+          <ion-item class="item-thumbnail-left item-text-wrap" ng-repeat="group in groups">
+           <img ng-if="group.better_featured_image" ng-src="{{group.better_featured_image.media_details.sizes.thumbnail.source_url}}" alt="Group Thumbnail">
+             <img ng-if="!group.better_featured_image" src="https://s3.amazonaws.com/gjcf-wp-uploads/wp-content/uploads/2016/05/23213835/icon-filler-150x150.jpg" alt="Group Thumbnail">
+            <h3 ng-bind-html="group.title.rendered"></h3>
+            <p ng-bind-html="stripLinks(group._gjcf_tc_groups_details)"></p>
+             <a class="button button-block button-outline  button-balanced" href="#"  ng-click="openLink(group)">Learn More</a>
+          </ion-item>
+        
+      
+        </ion-list>
+        
+                  <ion-infinite-scroll
+                 ng-if="isMore"
+                on-infinite="loadMore()"
+                distance="1%"
+                spinner="lines"
+                class="infinite-spinner-balanced">
+              </ion-infinite-scroll>
+            
+ 
+              <div class="card" ng-if="!isConnected">
+             <div class="item item-text-wrap">
+                <h2 class="assertive">No Network Connection</h2>
+               <p>I'm sorry, but your device is not connected to a network. This section of the app requires an internet connection.</p>
              </div>
            </div>
-          
-          <br><br>
-          <h4>Interested in joining?</h4>
-          
-         
-           <a class="button button-block button-outline button-balanced icon-left ion-ios-email-outline"  onclick="window.open('mailto:lisamcdaniel@mail.com?subject=Parental Telecon', '_system', ''); return false;" href="#">Request Info</a>
-        
-   
-        </div>
+       
     </ion-content>
 </ion-view>
-  
